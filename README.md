@@ -14,11 +14,13 @@ Upon selecting new game you can specifiy difficulty
 After selecting a difficulty setting the Sudoko game starts. There is a second timer at the bottom of the puzzle. The menu options "New game" and "Load Game" have changed to "I give up" and "Save Game"
 ![Start game](https://github.com/hcombs/Sudoko/blob/master/images/3.png?raw=true "Start Game")
 
-Pressing the I give up button solves the puzzle for you and the menu options revert back to their original state.
+Pressing the "I give up" button solves the puzzle for you and the menu options revert back to their original state.
 ![Give Up](https://github.com/hcombs/Sudoko/blob/master/images/4.png?raw=true "Give Up")
 
-
+Alternatively pressing the "Save Game" button saves your progress and displays a message to the user informing them that the game was saved. 
 ![Start Menu](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "Start Menu")
+
+
 ![Start Menu](https://github.com/hcombs/Sudoko/blob/master/images/6.png?raw=true "Start Menu")
 
 
