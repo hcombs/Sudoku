@@ -18,9 +18,11 @@ Pressing the "I give up" button solves the puzzle for you and the menu options r
 ![Give Up](https://github.com/hcombs/Sudoko/blob/master/images/4.png?raw=true "Give Up")
 
 Alternatively pressing the "Save Game" button saves your progress and displays a message to the user informing them that the game was saved. 
-![Start Menu](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "Start Menu")
+![Save Game](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "Save Game")
 
+Pressing the "Load Game" button brings back your progress on the saved puzzle and you can continue to play
+![Load Game](https://github.com/hcombs/Sudoko/blob/master/images/6.png?raw=true "Load Game")
 
-![Start Menu](https://github.com/hcombs/Sudoko/blob/master/images/6.png?raw=true "Start Menu")
+Pressing the quit button exits the program.
 
 
