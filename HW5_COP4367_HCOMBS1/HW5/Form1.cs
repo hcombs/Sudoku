@@ -26,10 +26,10 @@ namespace HW5
     public partial class Form1 : Form
     {
 
-
+        //counter for game timer
         private int counter = 0;
         static bool endtime = false;
-      
+      //solution set for puzzle
         private int[,]  StartingAnswer = {{7,9,2,3,5,1,8,4,6},
 									 {4,6,8,9,2,7,5,1,3},
 									 {1,3,5,6,8,4,7,9,2},
@@ -42,7 +42,7 @@ namespace HW5
 									};
 
 
-
+        //initial startup of program, displays the new game, load game, and quit game options, sets the background color of the program
         public Form1()
         {
             InitializeComponent();
@@ -113,6 +113,7 @@ namespace HW5
             }
 
         }
+        //displays timer
         private void label1_Click(object sender, EventArgs e)
         {
             if (endtime == false)
@@ -138,7 +139,7 @@ namespace HW5
             Anslabel1.Text = "";
 
         }     
-       
+       //saves game progress
         private void Save_Game(object sender, EventArgs e)
         {
             int stoptime = counter;
@@ -189,7 +190,7 @@ namespace HW5
 
 
         }
-
+        //opens the last saved game and displays the gameboard along with the timer
         private void LoadGame_Click(object sender, EventArgs e)
         {
             string timeholder;
@@ -250,12 +251,11 @@ namespace HW5
             button8.Visible = true;
             Anslabel1.Text = "Game Loaded";
         }
-
+        //exits the program
         private void Quit_Game(object sender, EventArgs e)
         {
             this.Close();
         }
-
 
         //diffculty selections
         private void Easy_Click(object sender, EventArgs e)
