@@ -28,119 +28,119 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.gamecreate = new System.Windows.Forms.Button();
+            this.loadgame = new System.Windows.Forms.Button();
+            this.savebtn = new System.Windows.Forms.Button();
+            this.quit = new System.Windows.Forms.Button();
+            this.easy = new System.Windows.Forms.Button();
+            this.medium = new System.Windows.Forms.Button();
+            this.hard = new System.Windows.Forms.Button();
             this.Difficulty_Label = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
-            this.lblstatus = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IgiveUp = new System.Windows.Forms.Button();
+            this.lbltime = new System.Windows.Forms.Label();
+            this.gameboard = new System.Windows.Forms.DataGridView();
             this.AnswerStatus = new System.Windows.Forms.Label();
             this.Anslabel1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameboard)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // gamecreate
             // 
-            this.button1.BackColor = System.Drawing.Color.SkyBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(12, 46);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "New Game";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.NewGame_Click);
-            this.button1.MouseLeave += new System.EventHandler(this.button1_leave);
-            this.button1.MouseHover += new System.EventHandler(this.button1_hover);
+            this.gamecreate.BackColor = System.Drawing.Color.SkyBlue;
+            this.gamecreate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.gamecreate.Location = new System.Drawing.Point(12, 46);
+            this.gamecreate.Name = "gamecreate";
+            this.gamecreate.Size = new System.Drawing.Size(75, 23);
+            this.gamecreate.TabIndex = 0;
+            this.gamecreate.Text = "New Game";
+            this.gamecreate.UseVisualStyleBackColor = false;
+            this.gamecreate.Click += new System.EventHandler(this.NewGame_Click);
+            this.gamecreate.MouseLeave += new System.EventHandler(this.newgame_leave);
+            this.gamecreate.MouseHover += new System.EventHandler(this.newgame_hover);
             // 
-            // button2
+            // loadgame
             // 
-            this.button2.BackColor = System.Drawing.Color.SkyBlue;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(12, 75);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Load Game";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.LoadGame_Click);
-            this.button2.MouseLeave += new System.EventHandler(this.button2_leave);
-            this.button2.MouseHover += new System.EventHandler(this.button2_hover);
+            this.loadgame.BackColor = System.Drawing.Color.SkyBlue;
+            this.loadgame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.loadgame.Location = new System.Drawing.Point(12, 75);
+            this.loadgame.Name = "loadgame";
+            this.loadgame.Size = new System.Drawing.Size(75, 23);
+            this.loadgame.TabIndex = 1;
+            this.loadgame.Text = "Load Game";
+            this.loadgame.UseVisualStyleBackColor = false;
+            this.loadgame.Click += new System.EventHandler(this.LoadGame_Click);
+            this.loadgame.MouseLeave += new System.EventHandler(this.load_leave);
+            this.loadgame.MouseHover += new System.EventHandler(this.load_hover);
             // 
-            // button3
+            // savebtn
             // 
-            this.button3.BackColor = System.Drawing.Color.SkyBlue;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(12, 75);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Save Game";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.Save_Game);
-            this.button3.MouseLeave += new System.EventHandler(this.button_leave);
-            this.button3.MouseHover += new System.EventHandler(this.button3_hover);
+            this.savebtn.BackColor = System.Drawing.Color.SkyBlue;
+            this.savebtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.savebtn.Location = new System.Drawing.Point(12, 75);
+            this.savebtn.Name = "savebtn";
+            this.savebtn.Size = new System.Drawing.Size(75, 23);
+            this.savebtn.TabIndex = 2;
+            this.savebtn.Text = "Save Game";
+            this.savebtn.UseVisualStyleBackColor = false;
+            this.savebtn.Click += new System.EventHandler(this.Save_Game);
+            this.savebtn.MouseLeave += new System.EventHandler(this.button_leave);
+            this.savebtn.MouseHover += new System.EventHandler(this.quit_hover);
             // 
-            // button4
+            // quit
             // 
-            this.button4.BackColor = System.Drawing.Color.SkyBlue;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Location = new System.Drawing.Point(12, 104);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Quit";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.Quit_Game);
-            this.button4.MouseLeave += new System.EventHandler(this.button4_leave);
-            this.button4.MouseHover += new System.EventHandler(this.button4_hover);
+            this.quit.BackColor = System.Drawing.Color.SkyBlue;
+            this.quit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.quit.Location = new System.Drawing.Point(12, 104);
+            this.quit.Name = "quit";
+            this.quit.Size = new System.Drawing.Size(75, 23);
+            this.quit.TabIndex = 3;
+            this.quit.Text = "Quit";
+            this.quit.UseVisualStyleBackColor = false;
+            this.quit.Click += new System.EventHandler(this.Quit_Game);
+            this.quit.MouseLeave += new System.EventHandler(this.save__leave);
+            this.quit.MouseHover += new System.EventHandler(this.save__hover);
             // 
-            // button5
+            // easy
             // 
-            this.button5.BackColor = System.Drawing.Color.SkyBlue;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Location = new System.Drawing.Point(194, 75);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Easy";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.Easy_Click);
-            this.button5.MouseLeave += new System.EventHandler(this.button5_leave);
-            this.button5.MouseHover += new System.EventHandler(this.button5_hover);
+            this.easy.BackColor = System.Drawing.Color.SkyBlue;
+            this.easy.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.easy.Location = new System.Drawing.Point(194, 75);
+            this.easy.Name = "easy";
+            this.easy.Size = new System.Drawing.Size(75, 23);
+            this.easy.TabIndex = 5;
+            this.easy.Text = "Easy";
+            this.easy.UseVisualStyleBackColor = false;
+            this.easy.Click += new System.EventHandler(this.Easy_Click);
+            this.easy.MouseLeave += new System.EventHandler(this.easy_leave);
+            this.easy.MouseHover += new System.EventHandler(this.easy_hover);
             // 
-            // button6
+            // medium
             // 
-            this.button6.BackColor = System.Drawing.Color.SkyBlue;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button6.Location = new System.Drawing.Point(275, 75);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Medium";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.Medium_Click);
-            this.button6.MouseLeave += new System.EventHandler(this.button6_leave);
-            this.button6.MouseHover += new System.EventHandler(this.button6_hover);
+            this.medium.BackColor = System.Drawing.Color.SkyBlue;
+            this.medium.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.medium.Location = new System.Drawing.Point(275, 75);
+            this.medium.Name = "medium";
+            this.medium.Size = new System.Drawing.Size(75, 23);
+            this.medium.TabIndex = 6;
+            this.medium.Text = "Medium";
+            this.medium.UseVisualStyleBackColor = false;
+            this.medium.Click += new System.EventHandler(this.Medium_Click);
+            this.medium.MouseLeave += new System.EventHandler(this.medium_leave);
+            this.medium.MouseHover += new System.EventHandler(this.medium_hover);
             // 
-            // button7
+            // hard
             // 
-            this.button7.BackColor = System.Drawing.Color.SkyBlue;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button7.Location = new System.Drawing.Point(356, 75);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "Hard";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.Hard_Click);
-            this.button7.MouseLeave += new System.EventHandler(this.button7_leave);
-            this.button7.MouseHover += new System.EventHandler(this.button7_hover);
+            this.hard.BackColor = System.Drawing.Color.SkyBlue;
+            this.hard.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.hard.Location = new System.Drawing.Point(356, 75);
+            this.hard.Name = "hard";
+            this.hard.Size = new System.Drawing.Size(75, 23);
+            this.hard.TabIndex = 7;
+            this.hard.Text = "Hard";
+            this.hard.UseVisualStyleBackColor = false;
+            this.hard.Click += new System.EventHandler(this.Hard_Click);
+            this.hard.MouseLeave += new System.EventHandler(this.hard_leave);
+            this.hard.MouseHover += new System.EventHandler(this.hard_hover);
             // 
             // Difficulty_Label
             // 
@@ -151,45 +151,45 @@
             this.Difficulty_Label.TabIndex = 8;
             this.Difficulty_Label.Text = "Select Difficulty";
             // 
-            // button8
+            // IgiveUp
             // 
-            this.button8.BackColor = System.Drawing.Color.SkyBlue;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button8.Location = new System.Drawing.Point(12, 46);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "I Give Up";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.GiveUp_Click);
-            this.button8.MouseLeave += new System.EventHandler(this.button8_leave);
-            this.button8.MouseHover += new System.EventHandler(this.button8_hover);
+            this.IgiveUp.BackColor = System.Drawing.Color.SkyBlue;
+            this.IgiveUp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.IgiveUp.Location = new System.Drawing.Point(12, 46);
+            this.IgiveUp.Name = "IgiveUp";
+            this.IgiveUp.Size = new System.Drawing.Size(75, 23);
+            this.IgiveUp.TabIndex = 9;
+            this.IgiveUp.Text = "I Give Up";
+            this.IgiveUp.UseVisualStyleBackColor = false;
+            this.IgiveUp.Click += new System.EventHandler(this.GiveUp_Click);
+            this.IgiveUp.MouseLeave += new System.EventHandler(this.giveup_leave);
+            this.IgiveUp.MouseHover += new System.EventHandler(this.giveup_hover);
             // 
-            // lblstatus
+            // lbltime
             // 
-            this.lblstatus.AutoSize = true;
-            this.lblstatus.Location = new System.Drawing.Point(295, 338);
-            this.lblstatus.Name = "lblstatus";
-            this.lblstatus.Size = new System.Drawing.Size(35, 13);
-            this.lblstatus.TabIndex = 10;
-            this.lblstatus.Text = "label1";
-            this.lblstatus.Click += new System.EventHandler(this.label1_Click);
+            this.lbltime.AutoSize = true;
+            this.lbltime.Location = new System.Drawing.Point(295, 338);
+            this.lbltime.Name = "lbltime";
+            this.lbltime.Size = new System.Drawing.Size(35, 13);
+            this.lbltime.TabIndex = 10;
+            this.lbltime.Text = "label1";
+            this.lbltime.Click += new System.EventHandler(this.label1_Click);
             // 
-            // dataGridView1
+            // gameboard
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.ColumnHeadersVisible = false;
-            this.dataGridView1.Location = new System.Drawing.Point(139, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(365, 312);
-            this.dataGridView1.TabIndex = 11;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
+            this.gameboard.AllowUserToAddRows = false;
+            this.gameboard.AllowUserToDeleteRows = false;
+            this.gameboard.AllowUserToResizeColumns = false;
+            this.gameboard.AllowUserToResizeRows = false;
+            this.gameboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gameboard.ColumnHeadersVisible = false;
+            this.gameboard.Location = new System.Drawing.Point(141, 23);
+            this.gameboard.Name = "gameboard";
+            this.gameboard.RowHeadersVisible = false;
+            this.gameboard.Size = new System.Drawing.Size(365, 312);
+            this.gameboard.TabIndex = 11;
+            this.gameboard.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gameboard_CellClick);
+            this.gameboard.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gameboard_CellValidating);
             // 
             // AnswerStatus
             // 
@@ -214,21 +214,21 @@
             this.ClientSize = new System.Drawing.Size(540, 360);
             this.Controls.Add(this.Anslabel1);
             this.Controls.Add(this.AnswerStatus);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.lblstatus);
-            this.Controls.Add(this.button8);
+            this.Controls.Add(this.gameboard);
+            this.Controls.Add(this.lbltime);
+            this.Controls.Add(this.IgiveUp);
             this.Controls.Add(this.Difficulty_Label);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.hard);
+            this.Controls.Add(this.medium);
+            this.Controls.Add(this.easy);
+            this.Controls.Add(this.quit);
+            this.Controls.Add(this.savebtn);
+            this.Controls.Add(this.loadgame);
+            this.Controls.Add(this.gamecreate);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gameboard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,17 +236,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button gamecreate;
+        private System.Windows.Forms.Button loadgame;
+        private System.Windows.Forms.Button savebtn;
+        private System.Windows.Forms.Button quit;
+        private System.Windows.Forms.Button easy;
+        private System.Windows.Forms.Button medium;
+        private System.Windows.Forms.Button hard;
         private System.Windows.Forms.Label Difficulty_Label;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Label lblstatus;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button IgiveUp;
+        private System.Windows.Forms.Label lbltime;
+        private System.Windows.Forms.DataGridView gameboard;
         private System.Windows.Forms.Label AnswerStatus;
         private System.Windows.Forms.Label Anslabel1;
     }

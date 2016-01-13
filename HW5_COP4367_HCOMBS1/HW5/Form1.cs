@@ -50,16 +50,16 @@ namespace HW5
             SetUpDataGridView();
             Display(StartingAnswer, 1);
             AnswerStatus.Visible = false;
-            lblstatus.Visible = false;
-            lblstatus.Text = "";
-            dataGridView1.Visible = false;
-            button3.Visible = false;
-            button5.Visible = false;
-            button6.Visible = false;
-            button7.Visible = false;
-            button8.Visible = false;
+            lbltime.Visible = false;
+            lbltime.Text = "";
+            gameboard.Visible = false;
+            savebtn.Visible = false;
+            easy.Visible = false;
+            medium.Visible = false;
+            hard.Visible = false;
+            IgiveUp.Visible = false;
             Difficulty_Label.Visible = false;
-            this.dataGridView1.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGrid1_Paint);
+            this.gameboard.Paint += new System.Windows.Forms.PaintEventHandler(this.DataGrid1_Paint);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -70,29 +70,29 @@ namespace HW5
         //formats the display for the sudoku puzzle
         private void SetUpDataGridView()
         {
-            dataGridView1.ColumnCount = 9;
-            DataGridViewColumn column1 = dataGridView1.Columns[0];
+            gameboard.ColumnCount = 9;
+            DataGridViewColumn column1 = gameboard.Columns[0];
             column1.Width = 30;
-            DataGridViewColumn column2 = dataGridView1.Columns[1];
+            DataGridViewColumn column2 = gameboard.Columns[1];
             column2.Width = 30;
-            DataGridViewColumn column3 = dataGridView1.Columns[2];
+            DataGridViewColumn column3 = gameboard.Columns[2];
             column3.Width = 30;
-            DataGridViewColumn column4 = dataGridView1.Columns[3];
+            DataGridViewColumn column4 = gameboard.Columns[3];
             column4.Width = 30;
-            DataGridViewColumn column5 = dataGridView1.Columns[4];
+            DataGridViewColumn column5 = gameboard.Columns[4];
             column5.Width = 30;
-            DataGridViewColumn column6 = dataGridView1.Columns[5];
+            DataGridViewColumn column6 = gameboard.Columns[5];
             column6.Width = 30;
-            DataGridViewColumn column7 = dataGridView1.Columns[6];
+            DataGridViewColumn column7 = gameboard.Columns[6];
             column7.Width = 30;
-            DataGridViewColumn column8 = dataGridView1.Columns[7];
+            DataGridViewColumn column8 = gameboard.Columns[7];
             column8.Width = 30;
-            DataGridViewColumn column9 = dataGridView1.Columns[8];
+            DataGridViewColumn column9 = gameboard.Columns[8];
             column9.Width = 30;
-            dataGridView1.Size = new Size(274, 274);
+            gameboard.Size = new Size(274, 274);
 
-            dataGridView1.GridColor = Color.SkyBlue;
-            dataGridView1.BackgroundColor = Color.SkyBlue;
+            gameboard.GridColor = Color.SkyBlue;
+            gameboard.BackgroundColor = Color.SkyBlue;
         }
 
         //timer progress displayed at screen bottom
@@ -119,12 +119,12 @@ namespace HW5
             if (endtime == false)
             {
                 counter++;
-                lblstatus.Text = counter.ToString();
+                lbltime.Text = counter.ToString();
             }
             else if (endtime == true)
             {
                 counter = 0;
-                lblstatus.Text = counter.ToString();
+                lbltime.Text = counter.ToString();
             }
         }
 
@@ -132,10 +132,10 @@ namespace HW5
         private void NewGame_Click(object sender, EventArgs e)
         {
             Difficulty_Label.Visible = true;
-            button5.Visible = true;
-            button6.Visible = true;
-            button7.Visible = true;
-            dataGridView1.Visible = false;
+            easy.Visible = true;
+            medium.Visible = true;
+            hard.Visible = true;
+            gameboard.Visible = false;
             Anslabel1.Text = "";
 
         }     
@@ -144,12 +144,15 @@ namespace HW5
         {
             int stoptime = counter;
             endtime = true;
-            dataGridView1.Visible = false;
-            button8.Visible = false;
+            gameboard.Visible = false;
+            IgiveUp.Visible = false;
             Anslabel1.Text = "Game Saved";
-            button1.Visible = true;
-            button3.Visible = false;
-            button2.Visible = true;
+            gamecreate.Visible = true;
+            if (savebtn.Visible == true)
+            {
+                savebtn.Visible = false;
+            }
+            loadgame.Visible = true;
 
             int[,] save = new int[9,9];
           
@@ -158,11 +161,11 @@ namespace HW5
             {
                 for (int col = 0; col < 9; col++)
                 {
-                    if (dataGridView1.Rows[row].Cells[col].Value != null)
+                    if (gameboard.Rows[row].Cells[col].Value != null)
                     {
-                        save[row,col] = Convert.ToInt32(dataGridView1.Rows[row].Cells[col].Value);
+                        save[row,col] = Convert.ToInt32(gameboard.Rows[row].Cells[col].Value);
                     }
-                    else if (dataGridView1.Rows[row].Cells[col].Value == null)
+                    else if (gameboard.Rows[row].Cells[col].Value == null)
                     {
                         save[row,col] = 0;
                     }
@@ -230,12 +233,12 @@ namespace HW5
                 {
                     if(result[rowIndex,columnIndex] !=0)
                     {
-                        dataGridView1.Rows[rowIndex].Cells[columnIndex].Value = result[rowIndex, columnIndex];                  
+                        gameboard.Rows[rowIndex].Cells[columnIndex].Value = result[rowIndex, columnIndex];                  
                     }
                     else if(result[rowIndex,columnIndex] ==0)
                     {
-                         dataGridView1.Rows[rowIndex].Cells[columnIndex].Value = null;
-                         dataGridView1.Rows[rowIndex].Cells[columnIndex].Style.BackColor=Color.PowderBlue;
+                         gameboard.Rows[rowIndex].Cells[columnIndex].Value = null;
+                         gameboard.Rows[rowIndex].Cells[columnIndex].Style.BackColor=Color.PowderBlue;
                     }
 
                 }
@@ -245,10 +248,10 @@ namespace HW5
 
 
             endtime = false;
-            dataGridView1.Visible = true;
-            button1.Visible = false;
-            button3.Visible = true;
-            button8.Visible = true;
+            gameboard.Visible = true;
+            gamecreate.Visible = false;
+            savebtn.Visible = true;
+            IgiveUp.Visible = true;
             Anslabel1.Text = "Game Loaded";
         }
         //exits the program
@@ -285,10 +288,10 @@ namespace HW5
         //display answer if user no longer wants to solve puzzle
         private void GiveUp_Click(object sender, EventArgs e)
         {
-            button8.Visible = false;
-            button1.Visible = true;
-            button3.Visible = false;
-            button2.Visible = true;
+            IgiveUp.Visible = false;
+            gamecreate.Visible = true;
+            savebtn.Visible = false;
+            loadgame.Visible = true;
             endtime = true;
             Unmasked_Answers();
 
@@ -296,69 +299,69 @@ namespace HW5
 
 
         //Sets the color for button on mouse hover and leave
-        private void button1_hover(object sender, EventArgs e)
+        private void newgame_hover(object sender, EventArgs e)
         {
-            button1.BackColor = Color.Aqua;
+            gamecreate.BackColor = Color.Aqua;
         }
-        private void button3_hover(object sender, EventArgs e)
+        private void quit_hover(object sender, EventArgs e)
         {
-            button3.BackColor = Color.Aqua;
+            savebtn.BackColor = Color.Aqua;
         }
         private void button_leave(object sender, EventArgs e)
         {
-            button3.BackColor = Color.SkyBlue;
+            savebtn.BackColor = Color.SkyBlue;
         }
-        private void button1_leave(object sender, EventArgs e)
+        private void newgame_leave(object sender, EventArgs e)
         {
-            button1.BackColor = Color.SkyBlue;
+            gamecreate.BackColor = Color.SkyBlue;
         }
-        private void button2_hover(object sender, EventArgs e)
+        private void load_hover(object sender, EventArgs e)
         {
-            button2.BackColor = Color.Aqua;
+            loadgame.BackColor = Color.Aqua;
         }
-        private void button2_leave(object sender, EventArgs e)
+        private void load_leave(object sender, EventArgs e)
         {
-            button2.BackColor = Color.SkyBlue;
+            loadgame.BackColor = Color.SkyBlue;
         }
-        private void button4_hover(object sender, EventArgs e)
+        private void save__hover(object sender, EventArgs e)
         {
-            button4.BackColor = Color.Aqua;
+            quit.BackColor = Color.Aqua;
         }
-        private void button4_leave(object sender, EventArgs e)
+        private void save__leave(object sender, EventArgs e)
         {
-            button4.BackColor = Color.SkyBlue;
+            quit.BackColor = Color.SkyBlue;
         }
-        private void button8_hover(object sender, EventArgs e)
+        private void giveup_hover(object sender, EventArgs e)
         {
-            button8.BackColor = Color.Aqua;
+            IgiveUp.BackColor = Color.Aqua;
         }
-        private void button8_leave(object sender, EventArgs e)
+        private void giveup_leave(object sender, EventArgs e)
         {
-            button8.BackColor = Color.SkyBlue;
+            IgiveUp.BackColor = Color.SkyBlue;
         }
-        private void button5_hover(object sender, EventArgs e)
+        private void easy_hover(object sender, EventArgs e)
         {
-            button5.BackColor = Color.Aqua;
+            easy.BackColor = Color.Aqua;
         }
-        private void button5_leave(object sender, EventArgs e)
+        private void easy_leave(object sender, EventArgs e)
         {
-            button5.BackColor = Color.SkyBlue;
+            easy.BackColor = Color.SkyBlue;
         }
-        private void button6_hover(object sender, EventArgs e)
+        private void medium_hover(object sender, EventArgs e)
         {
-            button6.BackColor = Color.Aqua;
+            medium.BackColor = Color.Aqua;
         }
-        private void button6_leave(object sender, EventArgs e)
+        private void medium_leave(object sender, EventArgs e)
         {
-            button6.BackColor = Color.SkyBlue;
+            medium.BackColor = Color.SkyBlue;
         }
-        private void button7_hover(object sender, EventArgs e)
+        private void hard_hover(object sender, EventArgs e)
         {
-            button7.BackColor = Color.Aqua;
+            hard.BackColor = Color.Aqua;
         }
-        private void button7_leave(object sender, EventArgs e)
+        private void hard_leave(object sender, EventArgs e)
         {
-            button7.BackColor = Color.SkyBlue;
+            hard.BackColor = Color.SkyBlue;
         }
 
 
@@ -366,16 +369,16 @@ namespace HW5
         private void diffculty_Click(object sender, EventArgs e)
         {
 
-            button2.Visible = false;
-            button3.Visible = true;
-            button5.Visible = false;
-            button6.Visible = false;
-            button7.Visible = false;
-            button8.Visible = true;
-            button1.Visible = false;
+            loadgame.Visible = false;
+            savebtn.Visible = true;
+            easy.Visible = false;
+            medium.Visible = false;
+            hard.Visible = false;
+            IgiveUp.Visible = true;
+            gamecreate.Visible = false;
             Difficulty_Label.Visible = false;
-            dataGridView1.Visible = true;
-            lblstatus.Visible = true;
+            gameboard.Visible = true;
+            lbltime.Visible = true;
         }
 
         //shows gameboard
@@ -400,7 +403,7 @@ namespace HW5
                   
                 }
 
-                dataGridView1.Rows.Add(row);
+                gameboard.Rows.Add(row);
 
 
             }
@@ -414,17 +417,17 @@ namespace HW5
             if (index == 0)
             {
                 Mask_Answers(0);
-                dataGridView1.Visible = true;
+                gameboard.Visible = true;
             }
             else if (index == 1)
             {
                 Mask_Answers(1);
-                dataGridView1.Visible = true;
+                gameboard.Visible = true;
             }
             else if (index == 2)
             {
                 Mask_Answers(2);
-                dataGridView1.Visible = true;
+                gameboard.Visible = true;
             }
         }
 
@@ -436,130 +439,130 @@ namespace HW5
             
             if (level == 0)
             {
-                dataGridView1.Rows[0].Cells[0].Value = null;
-                dataGridView1.Rows[0].Cells[0].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[0].Cells[1].Value = null;
-                dataGridView1.Rows[0].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[0].Cells[0].Value = null;
+                gameboard.Rows[0].Cells[0].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[0].Cells[1].Value = null;
+                gameboard.Rows[0].Cells[1].Style.BackColor = Color.PowderBlue;
                 
-                dataGridView1.Rows[1].Cells[1].Value = null;
-                dataGridView1.Rows[1].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[1].Cells[1].Value = null;
+                gameboard.Rows[1].Cells[1].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[1].Cells[4].Value = null;
-                dataGridView1.Rows[1].Cells[4].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[2].Cells[4].Value = null;
-                dataGridView1.Rows[2].Cells[4].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[1].Cells[4].Value = null;
+                gameboard.Rows[1].Cells[4].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[2].Cells[4].Value = null;
+                gameboard.Rows[2].Cells[4].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[1].Cells[7].Value = null;
-                dataGridView1.Rows[1].Cells[7].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[2].Cells[7].Value = null;
-                dataGridView1.Rows[2].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[1].Cells[7].Value = null;
+                gameboard.Rows[1].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[2].Cells[7].Value = null;
+                gameboard.Rows[2].Cells[7].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[7].Cells[7].Value = null;
-                dataGridView1.Rows[7].Cells[7].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[8].Cells[7].Value = null;
-                dataGridView1.Rows[8].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[7].Cells[7].Value = null;
+                gameboard.Rows[7].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[8].Cells[7].Value = null;
+                gameboard.Rows[8].Cells[7].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[5].Cells[4].Value = null;
-                dataGridView1.Rows[5].Cells[4].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[6].Cells[4].Value = null;
-                dataGridView1.Rows[6].Cells[4].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[5].Cells[4].Value = null;
+                gameboard.Rows[5].Cells[4].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[6].Cells[4].Value = null;
+                gameboard.Rows[6].Cells[4].Style.BackColor = Color.PowderBlue;
 
 
-                dataGridView1.Rows[3].Cells[1].Value = null;
-                dataGridView1.Rows[3].Cells[1].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[4].Cells[1].Value = null;
-                dataGridView1.Rows[4].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[3].Cells[1].Value = null;
+                gameboard.Rows[3].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[4].Cells[1].Value = null;
+                gameboard.Rows[4].Cells[1].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[7].Cells[1].Value = null;
-                dataGridView1.Rows[7].Cells[1].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[8].Cells[1].Value = null;
-                dataGridView1.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[8].Cells[2].Value = null;
-                dataGridView1.Rows[8].Cells[2].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[7].Cells[1].Value = null;
+                gameboard.Rows[7].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[8].Cells[1].Value = null;
+                gameboard.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[8].Cells[2].Value = null;
+                gameboard.Rows[8].Cells[2].Style.BackColor = Color.PowderBlue;
 
                 
                
             }
             else if (level == 1)
             {
-                dataGridView1.Rows[4].Cells[1].Value = null;
-                dataGridView1.Rows[4].Cells[1].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[5].Cells[1].Value = null;
-                dataGridView1.Rows[5].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[4].Cells[1].Value = null;
+                gameboard.Rows[4].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[5].Cells[1].Value = null;
+                gameboard.Rows[5].Cells[1].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[4].Cells[4].Value = null;
-                dataGridView1.Rows[4].Cells[4].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[5].Cells[4].Value = null;
-                dataGridView1.Rows[5].Cells[4].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[4].Cells[4].Value = null;
+                gameboard.Rows[4].Cells[4].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[5].Cells[4].Value = null;
+                gameboard.Rows[5].Cells[4].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[1].Cells[7].Value = null;
-                dataGridView1.Rows[1].Cells[7].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[2].Cells[7].Value = null;
-                dataGridView1.Rows[2].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[1].Cells[7].Value = null;
+                gameboard.Rows[1].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[2].Cells[7].Value = null;
+                gameboard.Rows[2].Cells[7].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[8].Cells[1].Value = null;
-                dataGridView1.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[8].Cells[1].Value = null;
+                gameboard.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
                 
                 for (int grid1 = 0; grid1 < 3; grid1++)
                 {
-                        dataGridView1.Rows[0].Cells[grid1].Value = null;
-                        dataGridView1.Rows[0].Cells[grid1].Style.BackColor = Color.PowderBlue;
-                        dataGridView1.Rows[1].Cells[grid1].Value = null;
-                        dataGridView1.Rows[1].Cells[grid1].Style.BackColor = Color.PowderBlue;
-                        dataGridView1.Rows[2].Cells[grid1].Value = null;
-                        dataGridView1.Rows[2].Cells[grid1].Style.BackColor = Color.PowderBlue;
+                        gameboard.Rows[0].Cells[grid1].Value = null;
+                        gameboard.Rows[0].Cells[grid1].Style.BackColor = Color.PowderBlue;
+                        gameboard.Rows[1].Cells[grid1].Value = null;
+                        gameboard.Rows[1].Cells[grid1].Style.BackColor = Color.PowderBlue;
+                        gameboard.Rows[2].Cells[grid1].Value = null;
+                        gameboard.Rows[2].Cells[grid1].Style.BackColor = Color.PowderBlue;
                         
-                        dataGridView1.Rows[6].Cells[8-grid1].Value = null;
-                        dataGridView1.Rows[6].Cells[8-grid1].Style.BackColor = Color.PowderBlue;
-                        dataGridView1.Rows[7].Cells[8-grid1].Value = null;
-                        dataGridView1.Rows[7].Cells[8-grid1].Style.BackColor = Color.PowderBlue;
-                        dataGridView1.Rows[8].Cells[8-grid1].Value = null;
-                        dataGridView1.Rows[8].Cells[8-grid1].Style.BackColor = Color.PowderBlue;
+                        gameboard.Rows[6].Cells[8-grid1].Value = null;
+                        gameboard.Rows[6].Cells[8-grid1].Style.BackColor = Color.PowderBlue;
+                        gameboard.Rows[7].Cells[8-grid1].Value = null;
+                        gameboard.Rows[7].Cells[8-grid1].Style.BackColor = Color.PowderBlue;
+                        gameboard.Rows[8].Cells[8-grid1].Value = null;
+                        gameboard.Rows[8].Cells[8-grid1].Style.BackColor = Color.PowderBlue;
                 }
             }
 
             else if (level == 2)
             {
-                dataGridView1.Rows[4].Cells[1].Value = null;
-                dataGridView1.Rows[4].Cells[1].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[5].Cells[1].Value = null;
-                dataGridView1.Rows[5].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[4].Cells[1].Value = null;
+                gameboard.Rows[4].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[5].Cells[1].Value = null;
+                gameboard.Rows[5].Cells[1].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[1].Cells[7].Value = null;
-                dataGridView1.Rows[1].Cells[7].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[2].Cells[7].Value = null;
-                dataGridView1.Rows[2].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[1].Cells[7].Value = null;
+                gameboard.Rows[1].Cells[7].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[2].Cells[7].Value = null;
+                gameboard.Rows[2].Cells[7].Style.BackColor = Color.PowderBlue;
 
-                dataGridView1.Rows[7].Cells[1].Value = null;
-                dataGridView1.Rows[7].Cells[1].Style.BackColor = Color.PowderBlue;
-                dataGridView1.Rows[8].Cells[1].Value = null;
-                dataGridView1.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[7].Cells[1].Value = null;
+                gameboard.Rows[7].Cells[1].Style.BackColor = Color.PowderBlue;
+                gameboard.Rows[8].Cells[1].Value = null;
+                gameboard.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
                 
 
                 for (int grid1 = 0; grid1 < 3; grid1++)
                 {
-                    dataGridView1.Rows[0].Cells[grid1].Value = null;
-                    dataGridView1.Rows[0].Cells[grid1].Style.BackColor = Color.PowderBlue;
-                    dataGridView1.Rows[1].Cells[grid1].Value = null;
-                    dataGridView1.Rows[1].Cells[grid1].Style.BackColor = Color.PowderBlue;
-                    dataGridView1.Rows[2].Cells[grid1].Value = null;
-                    dataGridView1.Rows[2].Cells[grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[0].Cells[grid1].Value = null;
+                    gameboard.Rows[0].Cells[grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[1].Cells[grid1].Value = null;
+                    gameboard.Rows[1].Cells[grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[2].Cells[grid1].Value = null;
+                    gameboard.Rows[2].Cells[grid1].Style.BackColor = Color.PowderBlue;
 
-                    dataGridView1.Rows[3].Cells[5-grid1].Value = null;
-                    dataGridView1.Rows[3].Cells[5 - grid1].Style.BackColor = Color.PowderBlue;
-                    dataGridView1.Rows[4].Cells[5 - grid1].Value = null;
-                    dataGridView1.Rows[4].Cells[5 - grid1].Style.BackColor = Color.PowderBlue;
-                    dataGridView1.Rows[5].Cells[5 - grid1].Value = null;
-                    dataGridView1.Rows[5].Cells[5 - grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[3].Cells[5-grid1].Value = null;
+                    gameboard.Rows[3].Cells[5 - grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[4].Cells[5 - grid1].Value = null;
+                    gameboard.Rows[4].Cells[5 - grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[5].Cells[5 - grid1].Value = null;
+                    gameboard.Rows[5].Cells[5 - grid1].Style.BackColor = Color.PowderBlue;
                     
                     
                     
-                    dataGridView1.Rows[6].Cells[8 - grid1].Value = null;
-                    dataGridView1.Rows[6].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
-                    dataGridView1.Rows[7].Cells[8 - grid1].Value = null;
-                    dataGridView1.Rows[7].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
-                    dataGridView1.Rows[8].Cells[8 - grid1].Value = null;
-                    dataGridView1.Rows[8].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[6].Cells[8 - grid1].Value = null;
+                    gameboard.Rows[6].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[7].Cells[8 - grid1].Value = null;
+                    gameboard.Rows[7].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
+                    gameboard.Rows[8].Cells[8 - grid1].Value = null;
+                    gameboard.Rows[8].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
                 }
 
 
@@ -577,24 +580,24 @@ namespace HW5
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    dataGridView1.Rows[i].Cells[j].Value = StartingAnswer[i, j];
-                    dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.White;
+                    gameboard.Rows[i].Cells[j].Value = StartingAnswer[i, j];
+                    gameboard.Rows[i].Cells[j].Style.BackColor = Color.White;
                 }
             }
         }
         
         //prevents users from editing displayed values
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void gameboard_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.Rows[e.RowIndex].ReadOnly = true;
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
+            gameboard.Rows[e.RowIndex].ReadOnly = true;
+            if (gameboard.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
             {
-                dataGridView1.Rows[e.RowIndex].ReadOnly = false;
+                gameboard.Rows[e.RowIndex].ReadOnly = false;
             }
         }
         
         //checks if user entered value is correct
-        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void gameboard_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
 
 
@@ -611,11 +614,11 @@ namespace HW5
                 if (val == StartingAnswer[e.RowIndex, e.ColumnIndex])
                 {
                     Anslabel1.Text = "Correct!";
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.White;
+                    gameboard.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.White;
 
                 }
                 else
-                    dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value= null;
+                    gameboard.Rows[e.RowIndex].Cells[e.ColumnIndex].Value= null;
                    
             } 
             

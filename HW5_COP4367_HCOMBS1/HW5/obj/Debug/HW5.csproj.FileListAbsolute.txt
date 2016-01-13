@@ -8,11 +8,10 @@ C:\Users\Howard\Desktop\sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.csproj.Gene
 C:\Users\Howard\Desktop\sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.exe
 C:\Users\Howard\Desktop\sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.pdb
 C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\bin\Debug\HW5.exe.config
-C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.exe
-C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.pdb
 C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\bin\Debug\HW5.exe
 C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\bin\Debug\HW5.pdb
-C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.csprojResolveAssemblyReference.cache
 C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.Form1.resources
 C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.Properties.Resources.resources
 C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.csproj.GenerateResource.Cache
+C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.exe
+C:\Users\Howard\Documents\GitHub\Sudoko\HW5_COP4367_HCOMBS1\HW5\obj\Debug\HW5.pdb
