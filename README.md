@@ -27,9 +27,14 @@ Pressing the quit button exits the program.
 
 #Updates 1/18/16
 
-I noticed that I have some methods that repeat themselves. As an example, The mouse hover and leave events for all buttons have their own event handlers as seen in the image below
+I noticed that I have some methods that repeat themselves. As an example, The mouse hover and leave events for all buttons have their own event handlers as seen in the image below.
 
 ![Event Functions](https://github.com/hcombs/Sudoko/blob/master/images/original.png?raw=true "Event Functions")
+
+It was about 63 lines of code, all doing the same thing, so I changed the code to have 2 methods to handle all mouse hover and leave events. New functions in the below image.
+
+![Event Functions](https://github.com/hcombs/Sudoko/blob/master/images/new.png?raw=true "Event Functions")
+
 
 
 
