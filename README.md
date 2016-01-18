@@ -25,4 +25,17 @@ Pressing the "Load Game" button brings back your progress on the saved puzzle an
 
 Pressing the quit button exits the program.
 
+#Updates 1/18/16
+
+I noticed that I have some methods that repeat themselves. As an example, The mouse hover and leave events for all buttons have their own event handlers as seen in the image below.
+
+![Event Functions](https://github.com/hcombs/Sudoko/blob/master/images/original.png?raw=true "Event Functions")
+
+It was about 63 lines of code, all doing the same thing. So I changed the code to have 2 methods to handle all mouse hover and leave events. I was able to shorten the events to 12 lines of code. New functions in the below image.
+
+![Event Functions](https://github.com/hcombs/Sudoko/blob/master/images/new.png?raw=true "Event Functions")
+
+
+
+
 
