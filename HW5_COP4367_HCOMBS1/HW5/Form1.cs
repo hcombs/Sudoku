@@ -207,9 +207,6 @@ namespace HW5
 
             String[][] input = File.ReadLines("answer.txt").Select(s=>s.Split(' ')).ToArray();
 
-
-           
-
             int[,] result = new int[9, 9];
 
             for(int i=0; i<9;i++)
@@ -259,32 +256,25 @@ namespace HW5
         {
             this.Close();
         }
-
         //diffculty selections
-        private void Easy_Click(object sender, EventArgs e)
-        {
+        private void difficultySelection(object sender, EventArgs e)
+        {            
             endtime = false;
             timer();
-            NewGame(0);
+            if (sender == easy)
+            {
+                NewGame(0);
+            }
+            else if (sender == medium)
+            {
+                NewGame(1);
+            }
+            else
+            {
+                NewGame(2);
+            }
             diffculty_Click(sender, e);
-
-        }
-        private void Medium_Click(object sender, EventArgs e)
-        {
-            endtime = false;
-            timer();
-            NewGame(1);
-            diffculty_Click(sender, e);
-        }
-        private void Hard_Click(object sender, EventArgs e)
-        {
-            endtime = false;
-            timer();            
-            NewGame(2);
-            diffculty_Click(sender, e);
-        }
-       
-        
+        } 
         //display answer if user no longer wants to solve puzzle
         private void GiveUp_Click(object sender, EventArgs e)
         {
@@ -296,8 +286,6 @@ namespace HW5
             Unmasked_Answers();
 
         }
-
-
         //Sets the color for button on mouse hover 
         private void hover(object sender, EventArgs e)
         {
@@ -310,11 +298,6 @@ namespace HW5
             var button = (Button)sender;
             button.BackColor = Color.SkyBlue;
         }
-
-
-
-
-   
         //sets buttons and grid visible for start of game
         private void diffculty_Click(object sender, EventArgs e)
         {
@@ -330,7 +313,6 @@ namespace HW5
             gameboard.Visible = true;
             lbltime.Visible = true;
         }
-
         //shows gameboard
         private void Display(int[,] solution, int difficulty)
         {
@@ -355,30 +337,25 @@ namespace HW5
 
                 gameboard.Rows.Add(row);
 
-
             }
-        }
-               
+        }    
         //Start game based on difficulty
         private void NewGame(int index)
         {
             GameLevel[] levels = { GameLevel.SIMPLE, GameLevel.MEDIUM, GameLevel.COMPLEX };
-
             if (index == 0)
             {
                 Mask_Answers(0);
-                gameboard.Visible = true;
             }
             else if (index == 1)
             {
                 Mask_Answers(1);
-                gameboard.Visible = true;
             }
             else if (index == 2)
             {
                 Mask_Answers(2);
-                gameboard.Visible = true;
             }
+            gameboard.Visible = true;
         }
 
         //blanks squares on the board
@@ -488,7 +465,6 @@ namespace HW5
                 gameboard.Rows[8].Cells[1].Value = null;
                 gameboard.Rows[8].Cells[1].Style.BackColor = Color.PowderBlue;
                 
-
                 for (int grid1 = 0; grid1 < 3; grid1++)
                 {
                     gameboard.Rows[0].Cells[grid1].Value = null;
@@ -514,13 +490,7 @@ namespace HW5
                     gameboard.Rows[8].Cells[8 - grid1].Value = null;
                     gameboard.Rows[8].Cells[8 - grid1].Style.BackColor = Color.PowderBlue;
                 }
-
-
-
             }
-
-
-
         }
 
         //displays solution if user presses I give up
@@ -593,9 +563,6 @@ namespace HW5
 
                 }
             }
-
-
-
         }
      
     }

@@ -110,7 +110,7 @@
             this.easy.TabIndex = 5;
             this.easy.Text = "Easy";
             this.easy.UseVisualStyleBackColor = false;
-            this.easy.Click += new System.EventHandler(this.Easy_Click);
+            this.easy.Click += new System.EventHandler(this.difficultySelection);
             this.easy.MouseLeave += new System.EventHandler(this.leave);
             this.easy.MouseHover += new System.EventHandler(this.hover);
             // 
@@ -124,7 +124,7 @@
             this.medium.TabIndex = 6;
             this.medium.Text = "Medium";
             this.medium.UseVisualStyleBackColor = false;
-            this.medium.Click += new System.EventHandler(this.Medium_Click);
+            this.medium.Click += new System.EventHandler(this.difficultySelection);
             this.medium.MouseLeave += new System.EventHandler(this.leave);
             this.medium.MouseHover += new System.EventHandler(this.hover);
             // 
@@ -138,7 +138,7 @@
             this.hard.TabIndex = 7;
             this.hard.Text = "Hard";
             this.hard.UseVisualStyleBackColor = false;
-            this.hard.Click += new System.EventHandler(this.Hard_Click);
+            this.hard.Click += new System.EventHandler(this.difficultySelection);
             this.hard.MouseLeave += new System.EventHandler(this.leave);
             this.hard.MouseHover += new System.EventHandler(this.hover);
             // 
@@ -183,7 +183,7 @@
             this.gameboard.AllowUserToResizeRows = false;
             this.gameboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gameboard.ColumnHeadersVisible = false;
-            this.gameboard.Location = new System.Drawing.Point(136, 23);
+            this.gameboard.Location = new System.Drawing.Point(129, 23);
             this.gameboard.Name = "gameboard";
             this.gameboard.RowHeadersVisible = false;
             this.gameboard.Size = new System.Drawing.Size(365, 312);
