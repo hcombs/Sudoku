@@ -298,73 +298,23 @@ namespace HW5
         }
 
 
-        //Sets the color for button on mouse hover and leave
-        private void newgame_hover(object sender, EventArgs e)
+        //Sets the color for button on mouse hover 
+        private void hover(object sender, EventArgs e)
         {
-            gamecreate.BackColor = Color.Aqua;
+            var button = (Button)sender;
+            button.BackColor = Color.Aqua;
         }
-        private void quit_hover(object sender, EventArgs e)
+        //Sets the color for button on mouse leave
+        private void leave(object sender, EventArgs e)
         {
-            savebtn.BackColor = Color.Aqua;
-        }
-        private void button_leave(object sender, EventArgs e)
-        {
-            savebtn.BackColor = Color.SkyBlue;
-        }
-        private void newgame_leave(object sender, EventArgs e)
-        {
-            gamecreate.BackColor = Color.SkyBlue;
-        }
-        private void load_hover(object sender, EventArgs e)
-        {
-            loadgame.BackColor = Color.Aqua;
-        }
-        private void load_leave(object sender, EventArgs e)
-        {
-            loadgame.BackColor = Color.SkyBlue;
-        }
-        private void save__hover(object sender, EventArgs e)
-        {
-            quit.BackColor = Color.Aqua;
-        }
-        private void save__leave(object sender, EventArgs e)
-        {
-            quit.BackColor = Color.SkyBlue;
-        }
-        private void giveup_hover(object sender, EventArgs e)
-        {
-            IgiveUp.BackColor = Color.Aqua;
-        }
-        private void giveup_leave(object sender, EventArgs e)
-        {
-            IgiveUp.BackColor = Color.SkyBlue;
-        }
-        private void easy_hover(object sender, EventArgs e)
-        {
-            easy.BackColor = Color.Aqua;
-        }
-        private void easy_leave(object sender, EventArgs e)
-        {
-            easy.BackColor = Color.SkyBlue;
-        }
-        private void medium_hover(object sender, EventArgs e)
-        {
-            medium.BackColor = Color.Aqua;
-        }
-        private void medium_leave(object sender, EventArgs e)
-        {
-            medium.BackColor = Color.SkyBlue;
-        }
-        private void hard_hover(object sender, EventArgs e)
-        {
-            hard.BackColor = Color.Aqua;
-        }
-        private void hard_leave(object sender, EventArgs e)
-        {
-            hard.BackColor = Color.SkyBlue;
+            var button = (Button)sender;
+            button.BackColor = Color.SkyBlue;
         }
 
 
+
+
+   
         //sets buttons and grid visible for start of game
         private void diffculty_Click(object sender, EventArgs e)
         {

@@ -55,8 +55,8 @@
             this.gamecreate.Text = "New Game";
             this.gamecreate.UseVisualStyleBackColor = false;
             this.gamecreate.Click += new System.EventHandler(this.NewGame_Click);
-            this.gamecreate.MouseLeave += new System.EventHandler(this.newgame_leave);
-            this.gamecreate.MouseHover += new System.EventHandler(this.newgame_hover);
+            this.gamecreate.MouseLeave += new System.EventHandler(this.leave);
+            this.gamecreate.MouseHover += new System.EventHandler(this.hover);
             // 
             // loadgame
             // 
@@ -69,8 +69,8 @@
             this.loadgame.Text = "Load Game";
             this.loadgame.UseVisualStyleBackColor = false;
             this.loadgame.Click += new System.EventHandler(this.LoadGame_Click);
-            this.loadgame.MouseLeave += new System.EventHandler(this.load_leave);
-            this.loadgame.MouseHover += new System.EventHandler(this.load_hover);
+            this.loadgame.MouseLeave += new System.EventHandler(this.leave);
+            this.loadgame.MouseHover += new System.EventHandler(this.hover);
             // 
             // savebtn
             // 
@@ -83,8 +83,8 @@
             this.savebtn.Text = "Save Game";
             this.savebtn.UseVisualStyleBackColor = false;
             this.savebtn.Click += new System.EventHandler(this.Save_Game);
-            this.savebtn.MouseLeave += new System.EventHandler(this.button_leave);
-            this.savebtn.MouseHover += new System.EventHandler(this.quit_hover);
+            this.savebtn.MouseLeave += new System.EventHandler(this.leave);
+            this.savebtn.MouseHover += new System.EventHandler(this.hover);
             // 
             // quit
             // 
@@ -97,8 +97,8 @@
             this.quit.Text = "Quit";
             this.quit.UseVisualStyleBackColor = false;
             this.quit.Click += new System.EventHandler(this.Quit_Game);
-            this.quit.MouseLeave += new System.EventHandler(this.save__leave);
-            this.quit.MouseHover += new System.EventHandler(this.save__hover);
+            this.quit.MouseLeave += new System.EventHandler(this.leave);
+            this.quit.MouseHover += new System.EventHandler(this.hover);
             // 
             // easy
             // 
@@ -111,8 +111,8 @@
             this.easy.Text = "Easy";
             this.easy.UseVisualStyleBackColor = false;
             this.easy.Click += new System.EventHandler(this.Easy_Click);
-            this.easy.MouseLeave += new System.EventHandler(this.easy_leave);
-            this.easy.MouseHover += new System.EventHandler(this.easy_hover);
+            this.easy.MouseLeave += new System.EventHandler(this.leave);
+            this.easy.MouseHover += new System.EventHandler(this.hover);
             // 
             // medium
             // 
@@ -125,8 +125,8 @@
             this.medium.Text = "Medium";
             this.medium.UseVisualStyleBackColor = false;
             this.medium.Click += new System.EventHandler(this.Medium_Click);
-            this.medium.MouseLeave += new System.EventHandler(this.medium_leave);
-            this.medium.MouseHover += new System.EventHandler(this.medium_hover);
+            this.medium.MouseLeave += new System.EventHandler(this.leave);
+            this.medium.MouseHover += new System.EventHandler(this.hover);
             // 
             // hard
             // 
@@ -139,8 +139,8 @@
             this.hard.Text = "Hard";
             this.hard.UseVisualStyleBackColor = false;
             this.hard.Click += new System.EventHandler(this.Hard_Click);
-            this.hard.MouseLeave += new System.EventHandler(this.hard_leave);
-            this.hard.MouseHover += new System.EventHandler(this.hard_hover);
+            this.hard.MouseLeave += new System.EventHandler(this.leave);
+            this.hard.MouseHover += new System.EventHandler(this.hover);
             // 
             // Difficulty_Label
             // 
@@ -162,8 +162,8 @@
             this.IgiveUp.Text = "I Give Up";
             this.IgiveUp.UseVisualStyleBackColor = false;
             this.IgiveUp.Click += new System.EventHandler(this.GiveUp_Click);
-            this.IgiveUp.MouseLeave += new System.EventHandler(this.giveup_leave);
-            this.IgiveUp.MouseHover += new System.EventHandler(this.giveup_hover);
+            this.IgiveUp.MouseLeave += new System.EventHandler(this.leave);
+            this.IgiveUp.MouseHover += new System.EventHandler(this.hover);
             // 
             // lbltime
             // 
@@ -183,7 +183,7 @@
             this.gameboard.AllowUserToResizeRows = false;
             this.gameboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gameboard.ColumnHeadersVisible = false;
-            this.gameboard.Location = new System.Drawing.Point(141, 23);
+            this.gameboard.Location = new System.Drawing.Point(136, 23);
             this.gameboard.Name = "gameboard";
             this.gameboard.RowHeadersVisible = false;
             this.gameboard.Size = new System.Drawing.Size(365, 312);
