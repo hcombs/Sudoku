@@ -519,8 +519,6 @@ namespace HW5
         //checks if user entered value is correct
         private void gameboard_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-
-
             if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
             {
               
