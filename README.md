@@ -9,13 +9,13 @@ The start of the game
 ![Start Menu](https://github.com/hcombs/Sudoko/blob/master/images/1.png?raw=true "Start Menu")
 
 After selecting a difficulty setting the Sudoko game starts.
-![Start game](https://github.com/hcombs/Sudoko/blob/master/images/3.png?raw=true "Start Game")
+![Start game](https://github.com/hcombs/Sudoko/blob/master/images/2.png?raw=true "Start Game")
 
 Pressing the "I give up" button. 
-![Give Up](https://github.com/hcombs/Sudoko/blob/master/images/4.png?raw=true "Give Up")
+![Give Up](https://github.com/hcombs/Sudoko/blob/master/images/3.png?raw=true "Give Up")
 
 Solving the puzzle
-![progress](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "progress")
+![progress](https://github.com/hcombs/Sudoko/blob/master/images/4.png?raw=true "progress")
 
 Solved puzzle
 ![Solved](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "Solved")
