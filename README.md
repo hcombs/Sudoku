@@ -1,39 +1,26 @@
 # Sudoko
 Sudoko Puzzle for Graphical Application Design Class
 
-This was a Sudoko puzzle made in C# using WinForms. 
+I made the original Sudoko puzzle in C# using WinForms. I recreated this project in javascript because I plan on placing it on my personal website for my portfolio. I use a backtracking algorithm to create the puzzle.
 
-A video of this project can be seen [here.](https://www.youtube.com/watch?v=5hUSE0_69rw)
+A video of the old project can be seen [here.](https://www.youtube.com/watch?v=5hUSE0_69rw)
 
-The start menu of the game
+The start of the game
 ![Start Menu](https://github.com/hcombs/Sudoko/blob/master/images/1.png?raw=true "Start Menu")
 
-Upon selecting new game you can specifiy difficulty
-![Difficulty](https://github.com/hcombs/Sudoko/blob/master/images/2.png?raw=true "Difficulty")
-
-After selecting a difficulty setting the Sudoko game starts. There is a second timer at the bottom of the puzzle. The menu options "New game" and "Load Game" have changed to "I give up" and "Save Game"
+After selecting a difficulty setting the Sudoko game starts.
 ![Start game](https://github.com/hcombs/Sudoko/blob/master/images/3.png?raw=true "Start Game")
 
-Pressing the "I give up" button solves the puzzle for you and the menu options revert back to their original state.
+Pressing the "I give up" button. 
 ![Give Up](https://github.com/hcombs/Sudoko/blob/master/images/4.png?raw=true "Give Up")
 
-Alternatively pressing the "Save Game" button saves your progress and displays a message to the user informing them that the game was saved. 
-![Save Game](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "Save Game")
+Solving the puzzle
+![progress](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "progress")
 
-Pressing the "Load Game" button brings back your progress on the saved puzzle and you can continue to play
-![Load Game](https://github.com/hcombs/Sudoko/blob/master/images/6.png?raw=true "Load Game")
+Solved puzzle
+![Solved](https://github.com/hcombs/Sudoko/blob/master/images/5.png?raw=true "Solved")
 
-Pressing the quit button exits the program.
 
-#Updates 1/18/16
-
-I noticed that I have some methods that repeat themselves. As an example, The mouse hover and leave events for all buttons have their own event handlers as seen in the image below.
-
-![Event Functions](https://github.com/hcombs/Sudoko/blob/master/images/original.png?raw=true "Event Functions")
-
-It was about 63 lines of code, all doing the same thing. So I changed the code to have 2 methods to handle all mouse hover and leave events. I was able to shorten the events to 12 lines of code. New functions in the below image.
-
-![Event Functions](https://github.com/hcombs/Sudoko/blob/master/images/new.png?raw=true "Event Functions")
 
 
 
