@@ -1,4 +1,4 @@
-# Sudoko
+# Sudoku
 Sudoko Puzzle for Graphical Application Design Class
 
 I made the original Sudoko puzzle in C# using WinForms. I recreated this project in javascript because I plan on placing it on my personal website for my portfolio. I use a backtracking algorithm to create the puzzle.
