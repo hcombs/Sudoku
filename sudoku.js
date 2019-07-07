@@ -1,4 +1,4 @@
-var lfp;
+/*var lfp;
 var grid = function(){
 	var init = function(){
 		var squareVal = squareLength();
@@ -280,7 +280,39 @@ difficulty(easy,0,"");
 
 difficulty(medium,0,"");
 
-difficulty(hard,0,"");
+difficulty(hard,0,"");*/
 
 
+
+var dom = (function(){
+	var $ = function(id){
+		return document.getElementById(id);
+	};
+
+	Element.prototype.cssVal = function (cssClass){
+		this.className = cssClass;
+		return this;
+	};
+
+	Element.prototype.addProperty = function(propertyName,propertyValue){
+		this.setAttribute(propertyName,propertyValue);
+		return this;
+	}
+
+
+	Element.prototype.addStyle = function(propertyName,propertyValue){
+		this.style[propertyName] = propertyValue;
+		return this;
+	}
+	
+
+	Element.prototype.setInnerHtml = function(inner){
+		this.innerHTML = inner;
+		return this;
+	};
+
+	return {
+		$:$
+	};
+}());
 
