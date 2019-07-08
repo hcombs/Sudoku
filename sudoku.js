@@ -2,19 +2,14 @@
 var grid = function(){
 	var init = function(){
 		var squareVal = squareLength();
-		var leftPos = (document.documentElement.clientWidth - squareVal) / 2;
-		lfp = leftPos;
+
 		var rowHeight = squareVal / 9;
 		var colWidth = rowHeight - 1;
 
-		var container = document.getElementById("board");
-		container.style.left = leftPos + "px";
 		createGrid(1,container,rowHeight,colWidth);
 	};
 
-	var squareLength = function(){
-		return document.documentElement.clientWidth > document.documentElement.clientHeight ? 0.3 * document.documentElement.clientWidth: 0.9 * document.documentElement.clientWidth;
-	};
+
 
 	var puzzlePiece = function(type,cl,width,height){
 		var piece = document.createElement(type);
@@ -289,6 +284,10 @@ var dom = (function(){
 		return document.getElementById(id);
 	};
 
+	var createElement = function(domType){
+		return document.createElement(domType);
+	}
+
 	Element.prototype.cssVal = function (cssClass){
 		this.className = cssClass;
 		return this;
@@ -297,15 +296,13 @@ var dom = (function(){
 	Element.prototype.addProperty = function(propertyName,propertyValue){
 		this.setAttribute(propertyName,propertyValue);
 		return this;
-	}
-
+	};
 
 	Element.prototype.addStyle = function(propertyName,propertyValue){
 		this.style[propertyName] = propertyValue;
 		return this;
-	}
+	};
 	
-
 	Element.prototype.setInnerHtml = function(inner){
 		this.innerHTML = inner;
 		return this;
@@ -316,3 +313,47 @@ var dom = (function(){
 	};
 }());
 
+var gamePieces = function(){
+	var contents = {
+		'containerSize':'',
+		'left':'',
+		'squareSize':''
+	};
+
+	var getSquare = function(){
+		var width = document.documentElement.clientWidth;
+		var height = document.documentElement.clientHeight;
+		var square = width > height ? width * 0.3 : width * 0.9;
+		return square;
+	};
+
+	var getLeft = function(square){
+		return (document.documentElement.clientWidth - square) / 2;
+	};
+
+	var set = function(key,value){
+		contents[key] = value;
+	}; 
+
+	var setDimensions = function(){
+		var square = getSquare();
+		var leftPos = getLeft(square);
+		set('containerSize',square+"px");
+		set('left',leftPos+"px");
+		set('squareSize',(square/ 9) - 1);
+		return contents;
+	};
+
+	return {
+		setDimensions:setDimensions
+	};
+}();
+
+
+window.onload = function(){
+	board = gamePieces.setDimensions();
+	dom.$("board").addStyle("left",board['left']).
+		addStyle("width",board['containerSize']).
+		addStyle("height",board['containerSize']);
+
+}
