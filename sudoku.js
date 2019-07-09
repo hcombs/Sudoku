@@ -1,59 +1,132 @@
-/*var lfp;
-var grid = function(){
-	var init = function(){
-		var squareVal = squareLength();
-
-		var rowHeight = squareVal / 9;
-		var colWidth = rowHeight - 1;
-
-		createGrid(1,container,rowHeight,colWidth);
+var dom = (function(){
+	var $ = function(id){
+		return document.getElementById(id);
 	};
 
-
-
-	var puzzlePiece = function(type,cl,width,height){
-		var piece = document.createElement(type);
-		piece.setAttribute("class",cl);
-		piece.style.height = height + "px";
-		piece.style.width = width + "px";
-		return piece;
-	};
-
-	var column = function(colWidth,rowHeight){
-		var col = puzzlePiece("div","col",colWidth,rowHeight);
-		return col;
-	};
-
-	var inputs = function(k,colWidth){
-		var input = puzzlePiece("input","puzzleSquare",colWidth - 2, colWidth - 2);
-		input.setAttribute("type","text");
-		input.style.left = ((k - 1) * (colWidth + 1)) + "px";
-		input.onkeyup = function(){
-			this.value = !checkValue(this.value) ? "":this.value;
-		};
-		return input;
+	var createElement = function(domType){
+		return document.createElement(domType);
 	};
 
 	var append = function(parent,child){
 		parent.appendChild(child);
-		return parent;		
 	};
 
-	var createGrid = function(base,container,rowHeight,colWidth){
-		if(base < 10){
-			var cols = Array.from({length: 9}, (v, i) => column(colWidth,rowHeight));				
-			var row = cols.reduce(append,puzzlePiece("div","row",rowHeight * 9, rowHeight));
-			append(container,row);
-			base++;
-			createGrid(base,container,rowHeight,colWidth);
-		}
+	Element.prototype.cssVal = function (cssClass){
+		this.className = cssClass;
+		return this;
+	};
+
+	Element.prototype.addProperty = function(propertyName,propertyValue){
+		this.setAttribute(propertyName,propertyValue);
+		return this;
+	};
+
+	Element.prototype.addStyle = function(propertyName,propertyValue){
+		this.style[propertyName] = propertyValue;
+		return this;
+	};
+	
+	Element.prototype.setInnerHtml = function(inner){
+		this.innerHTML = inner;
+		return this;
+	};
+
+	return {
+		$:$,
+		createElement:createElement,
+		append:append
+	};
+}());
+
+var gamePieces = function(){
+	var contents = {
+		'containerSize':'',
+		'left':'',
+		'squareSize':''
+	};
+
+	var getSquare = function(){
+		var width = document.documentElement.clientWidth;
+		var height = document.documentElement.clientHeight;
+		var square = width > height ? width * 0.3 : width * 0.9;
+		return square;
+	};
+
+	var getLeft = function(square){
+		return (document.documentElement.clientWidth - square) / 2;
+	};
+
+	var set = function(key,value){
+		contents[key] = value;
+	}; 
+
+	var setDimensions = function(){
+		var square = getSquare();
+		var leftPos = getLeft(square);
+		set('containerSize',square+"px");
+		set('left',leftPos+"px");
+		set('squareSize',((square/ 9) - 1) +'px');
+		return contents;
+	};
+
+	return {
+		setDimensions:setDimensions
+	};
+}();
+var initial = function(){
+
+	var board;
+
+	var column = function(){
+		var col = dom.createElement('div');
+		col.cssVal('col').
+			addStyle('height',board.squareSize).
+			addStyle('width',board.squareSize);
+		return col;
+	};
+
+	var row = function(){
+		var row = dom.createElement('div');
+		row.cssVal("row").
+			addStyle("height",board.squareSize);	
+		
+		accumulator(1,9,column,row,dom.append);
+
+		return row;
+	};
+
+	var setDisplay = function(){
+		board = gamePieces.setDimensions();
+		
+		dom.$("board").setInnerHtml('').
+			addStyle("left",board.left).
+			addStyle("width",board.containerSize).
+			addStyle("height",board.containerSize);
+
+		accumulator(1,9,row,dom.$('board'),dom.append);
 	};
 
 	return{
-		init:init,
-		puzzlePiece:puzzlePiece
+		setDisplay:setDisplay
 	};
 }();
+
+var accumulator = function(pos,end,indexFn,total,totalFn){
+	if (pos <= end){
+		totalFn(total,indexFn());
+		pos++;
+		accumulator(pos,end,indexFn,total,totalFn);
+	}
+};
+
+window.onload = function(){
+	initial.setDisplay();
+};
+
+
+
+
+/*
 var solvedPuzzle = function(){
 	var makeGrid = function(grid,row,col){
 		var point = unassignedSection(grid);
@@ -74,7 +147,6 @@ var solvedPuzzle = function(){
 				grid[row][col] = 0;
 			}
 		}
-
 		return false;
 	};
 	
@@ -264,96 +336,9 @@ var difficulty = function(endPt,row,col){
 	difficulty(endPt,row,col);
 };
 var puzzle = fillBoard();
-
 var easy = 3;
 var medium = 5;
 var hard = 9;
-
-
-
 difficulty(easy,0,"");
-
 difficulty(medium,0,"");
-
 difficulty(hard,0,"");*/
-
-
-
-var dom = (function(){
-	var $ = function(id){
-		return document.getElementById(id);
-	};
-
-	var createElement = function(domType){
-		return document.createElement(domType);
-	}
-
-	Element.prototype.cssVal = function (cssClass){
-		this.className = cssClass;
-		return this;
-	};
-
-	Element.prototype.addProperty = function(propertyName,propertyValue){
-		this.setAttribute(propertyName,propertyValue);
-		return this;
-	};
-
-	Element.prototype.addStyle = function(propertyName,propertyValue){
-		this.style[propertyName] = propertyValue;
-		return this;
-	};
-	
-	Element.prototype.setInnerHtml = function(inner){
-		this.innerHTML = inner;
-		return this;
-	};
-
-	return {
-		$:$
-	};
-}());
-
-var gamePieces = function(){
-	var contents = {
-		'containerSize':'',
-		'left':'',
-		'squareSize':''
-	};
-
-	var getSquare = function(){
-		var width = document.documentElement.clientWidth;
-		var height = document.documentElement.clientHeight;
-		var square = width > height ? width * 0.3 : width * 0.9;
-		return square;
-	};
-
-	var getLeft = function(square){
-		return (document.documentElement.clientWidth - square) / 2;
-	};
-
-	var set = function(key,value){
-		contents[key] = value;
-	}; 
-
-	var setDimensions = function(){
-		var square = getSquare();
-		var leftPos = getLeft(square);
-		set('containerSize',square+"px");
-		set('left',leftPos+"px");
-		set('squareSize',(square/ 9) - 1);
-		return contents;
-	};
-
-	return {
-		setDimensions:setDimensions
-	};
-}();
-
-
-window.onload = function(){
-	board = gamePieces.setDimensions();
-	dom.$("board").addStyle("left",board['left']).
-		addStyle("width",board['containerSize']).
-		addStyle("height",board['containerSize']);
-
-}
