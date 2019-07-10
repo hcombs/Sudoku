@@ -31,13 +31,19 @@ var dom = (function(){
 		return this;
 	};
 
+	Element.prototype.registerEvent = function(event,f){
+		this[event] = function(){
+			f();
+		};
+		return this;
+	};
+
 	return {
 		$:$,
 		createElement:createElement,
 		append:append
 	};
 }());
-
 var gamePieces = function(){
 	var contents = {
 		'containerSize':'',
@@ -56,16 +62,12 @@ var gamePieces = function(){
 		return (document.documentElement.clientWidth - square) / 2;
 	};
 
-	var set = function(key,value){
-		contents[key] = value;
-	}; 
-
 	var setDimensions = function(){
 		var square = getSquare();
 		var leftPos = getLeft(square);
-		set('containerSize',square+"px");
-		set('left',leftPos+"px");
-		set('squareSize',((square/ 9) - 1) +'px');
+		contents.containerSize = square+"px";
+		contents.left = leftPos+"px";
+		contents.squareSize = ((square/ 9) - 1) +'px';
 		return contents;
 	};
 
@@ -73,7 +75,7 @@ var gamePieces = function(){
 		setDimensions:setDimensions
 	};
 }();
-var initial = function(){
+var displayBoard = function(){
 
 	var board;
 
@@ -89,27 +91,57 @@ var initial = function(){
 		var row = dom.createElement('div');
 		row.cssVal("row").
 			addStyle("height",board.squareSize);	
-		
-		accumulator(1,9,column,row,dom.append);
-
-		return row;
+		return setDom(column,row);
 	};
 
-	var setDisplay = function(){
-		board = gamePieces.setDimensions();
-		
+	var setDom = function(fn,el){
+		return accumulator(1,9,fn,el,dom.append);
+	};
+
+	var container = function(){
 		dom.$("board").setInnerHtml('').
 			addStyle("left",board.left).
 			addStyle("width",board.containerSize).
 			addStyle("height",board.containerSize);
+		return setDom(row,dom.$('board'));
+	};
 
-		accumulator(1,9,row,dom.$('board'),dom.append);
+	var setDisplay = function(){
+		board = gamePieces.setDimensions();		
+		container();
 	};
 
 	return{
 		setDisplay:setDisplay
 	};
 }();
+var createSolution = function(){
+	var grid;
+	var blankRow = function(){
+		return accumulator(1,9,empty,[],stackPush);
+	};
+	var empty = function(){
+		return 0;
+	};
+
+	var getValues = function(row,col){
+
+	};
+
+
+
+	var initializeEmptyGrid = function(){
+		grid = accumulator(1,9,blankRow,[],stackPush);
+		var row = randomValue(8,0);
+		var col = randomValue(8,0);
+		grid[row][col] = randomValue(9,1);
+		return grid;
+	};
+	return{
+		initializeEmptyGrid:initializeEmptyGrid
+	};
+}();
+
 
 var accumulator = function(pos,end,indexFn,total,totalFn){
 	if (pos <= end){
@@ -117,11 +149,21 @@ var accumulator = function(pos,end,indexFn,total,totalFn){
 		pos++;
 		accumulator(pos,end,indexFn,total,totalFn);
 	}
+	return total;
+};
+var stackPush = function(a,b){
+	a.push(b);
+};
+var randomValue = function(max,min){
+	return parseInt(Math.floor(Math.random() * max - min) + min);
 };
 
-window.onload = function(){
-	initial.setDisplay();
-};
+document.body.registerEvent('onload',displayBoard.setDisplay);
+document.body.registerEvent('onresize',displayBoard.setDisplay);
+
+
+var test = createSolution.initializeEmptyGrid();
+console.log(test);
 
 
 
@@ -150,9 +192,6 @@ var solvedPuzzle = function(){
 		return false;
 	};
 	
-	var randSudokuVal = function(){ return parseInt(Math.random() * 8);};
-	var row = function() { return Array.from({length:9},(v,i)=>0);};
-
 	var unassignedSection = function(grid){
 		var section = [];
 		section[0] = -1;
@@ -210,7 +249,6 @@ var solvedPuzzle = function(){
 	};
 
 	var init = function(){	
-		var grid = Array.from({length:9},(v,i)=>row());
 		grid[randSudokuVal()][randSudokuVal()] = randSudokuVal();
 		makeGrid(grid,0,0);
 		return grid;
@@ -232,6 +270,7 @@ var fillBoard = function(){
 
 	return puzzle;
 };
+/*
 var rotateInput = function(el){
 	var pos = Array.from(el.parentElement.children).indexOf(el) + 1;
 	var viewportOffset = el.getBoundingClientRect();
