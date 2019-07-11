@@ -124,23 +124,70 @@ var createSolution = function(){
 		return 0;
 	};
 
-	var getValues = function(row,col){
-
-	};
-
-
-
 	var initializeEmptyGrid = function(){
 		grid = accumulator(1,9,blankRow,[],stackPush);
 		var row = randomValue(8,0);
 		var col = randomValue(8,0);
 		grid[row][col] = randomValue(9,1);
+		console.log(checkPuzzle.column(3,grid,0));
+		console.log(checkPuzzle.row(7,grid,4));
 		return grid;
 	};
 	return{
 		initializeEmptyGrid:initializeEmptyGrid
 	};
 }();
+
+var checkPuzzle = function(){
+	var column = function(row,grid,key){
+		return filterMatch(0,key,grid[row]);
+	};
+
+	var row = function(column,grid,key){
+		return filterMatch(0,key,flatten(0,8,grid,column,[]));
+	};
+
+	var grid = function(row,column,grid){
+		var rowStart = row - (row%3);
+		var colStart = col - (col%3);
+
+		var colEnd = colStart + 2;
+		var rowEnd = rowStart + 2;
+	};
+
+	var inRange = function(colStart,colEnd,rowStart,rowEnd,grid){
+		if(rowStart > rowEnd){
+			return -1;
+		}
+	};
+
+	return{
+		column:column,
+		row:row,
+		grid:grid
+	};
+
+}();
+
+var filterMatch = function(pos,key,array){
+	if(pos < array.length){
+		if(array[pos]=== key){
+			return key;
+		}
+		pos++;
+		return filterMatch(pos,key,array);
+	}
+	return -1;
+};
+
+var flatten = function(pos,end,array,col,total){
+	if(pos <= end){
+		stackPush(total,array[pos][col]);
+		pos++;
+		flatten(pos,end,array,col,total);
+	}
+	return total;
+};
 
 
 var accumulator = function(pos,end,indexFn,total,totalFn){
@@ -153,6 +200,7 @@ var accumulator = function(pos,end,indexFn,total,totalFn){
 };
 var stackPush = function(a,b){
 	a.push(b);
+	return a;
 };
 var randomValue = function(max,min){
 	return parseInt(Math.floor(Math.random() * max - min) + min);
@@ -227,24 +275,6 @@ var solvedPuzzle = function(){
 			}
 		}
 			
-		return false;
-	};
-
-	var inRow = function(ref,grid,row){
-		for(var i = 0; i< 9; i++){
-			if(grid[row][i] === ref){
-				return true;
-			}
-		}
-		return false;
-	};
-
-	var inCol = function(ref,grid,col){
-		for(var i = 0; i< 9; i++){
-			if(grid[i][col] === ref){
-				return true;
-			}
-		}
 		return false;
 	};
 
