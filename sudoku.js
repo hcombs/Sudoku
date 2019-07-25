@@ -1,142 +1,40 @@
-var dom = (function(){
+Element.prototype.assignValue = function(key,value){
+	this[key] = value;
+	return this;
+};
+
+var dom = function(){
 	var $ = function(id){
 		return document.getElementById(id);
 	};
-
-	var createElement = function(domType){
-		return document.createElement(domType);
+	var newEl = function(type){
+		return document.createElement(type);
 	};
-
 	var append = function(parent,child){
 		parent.appendChild(child);
 	};
-
-	Element.prototype.cssVal = function (cssClass){
-		this.className = cssClass;
-		return this;
-	};
-
-	Element.prototype.addProperty = function(propertyName,propertyValue){
-		this.setAttribute(propertyName,propertyValue);
-		return this;
-	};
-
-	Element.prototype.addStyle = function(propertyName,propertyValue){
-		this.style[propertyName] = propertyValue;
-		return this;
-	};
-	
-	Element.prototype.setInnerHtml = function(inner){
-		this.innerHTML = inner;
-		return this;
-	};
-
-	Element.prototype.registerEvent = function(event,f){
-		this[event] = function(){
-			f();
-		};
-		return this;
-	};
-
-	return {
+	return{
 		$:$,
-		createElement:createElement,
+		newEl:newEl,
 		append:append
-	};
-}());
-var gamePieces = function(){
-	var contents = {
-		'containerSize':'',
-		'left':'',
-		'squareSize':''
-	};
-
-	var getSquare = function(){
-		var width = document.documentElement.clientWidth;
-		var height = document.documentElement.clientHeight;
-		var square = width > height ? width * 0.3 : width * 0.9;
-		return square;
-	};
-
-	var getLeft = function(square){
-		return (document.documentElement.clientWidth - square) / 2;
-	};
-
-	var setDimensions = function(){
-		var square = getSquare();
-		var leftPos = getLeft(square);
-		contents.containerSize = square+"px";
-		contents.left = leftPos+"px";
-		contents.squareSize = ((square/ 9) - 1) +'px';
-		return contents;
-	};
-
-	return {
-		setDimensions:setDimensions
-	};
+	}
 }();
-var displayBoard = function(){
 
-	var board;
+var display = function(){
+	var colSize = ((document.documentElement.clientWidth * 0.3) / 9) - 4;
+	var containerSize = (colSize +2) * 9;
+	var leftPos = (document.documentElement.clientWidth - containerSize) / 2;
 
-	var column = function(){
-		var col = dom.createElement('div');
-		col.cssVal('col').
-			addStyle('height',board.squareSize).
-			addStyle('width',board.squareSize);
-		return col;
-	};
+	dom.$("board").assignValue("innerHTML","")
+		.assignValue("style","width:"+containerSize+"px;height:"+containerSize+"px;left:"+leftPos+"px;");
 
-	var row = function(){
-		var row = dom.createElement('div');
-		row.cssVal("row").
-			addStyle("height",board.squareSize);	
-		return setDom(column,row);
-	};
-
-	var setDom = function(fn,el){
-		return accumulator(1,9,fn,el,dom.append);
-	};
-
-	var container = function(){
-		dom.$("board").setInnerHtml('').
-			addStyle("left",board.left).
-			addStyle("width",board.containerSize).
-			addStyle("height",board.containerSize);
-		return setDom(row,dom.$('board'));
-	};
-
-	var setDisplay = function(){
-		board = gamePieces.setDimensions();		
-		container();
-	};
-
-	return{
-		setDisplay:setDisplay
-	};
-}();
-var createSolution = function(){
-	var grid;
-	var blankRow = function(){
-		return accumulator(1,9,empty,[],stackPush);
-	};
-	var empty = function(){
-		return 0;
-	};
-
-	var initializeEmptyGrid = function(){
-		grid = accumulator(1,9,blankRow,[],stackPush);
-		var row = randomValue(8,0);
-		var col = randomValue(8,0);
-		grid[row][col] = randomValue(9,1);
-		console.log(checkPuzzle.column(3,grid,0));
-		console.log(checkPuzzle.row(7,grid,4));
-		return grid;
-	};
-	return{
-		initializeEmptyGrid:initializeEmptyGrid
-	};
-}();
+	for(var i =0; i <81; i++){
+		var col = dom.newEl('div').assignValue('className','col')
+			.assignValue("style","width:"+colSize+"px;height:"+colSize+"px")
+			.assignValue("innerHTML",i);
+		dom.append(dom.$("board"),col);
+	}	
+};
 
 var checkPuzzle = function(){
 	var column = function(row,grid,key){
@@ -189,7 +87,6 @@ var flatten = function(pos,end,array,col,total){
 	return total;
 };
 
-
 var accumulator = function(pos,end,indexFn,total,totalFn){
 	if (pos <= end){
 		totalFn(total,indexFn());
@@ -206,12 +103,7 @@ var randomValue = function(max,min){
 	return parseInt(Math.floor(Math.random() * max - min) + min);
 };
 
-document.body.registerEvent('onload',displayBoard.setDisplay);
-document.body.registerEvent('onresize',displayBoard.setDisplay);
-
-
-var test = createSolution.initializeEmptyGrid();
-console.log(test);
+display();
 
 
 
