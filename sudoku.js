@@ -20,7 +20,7 @@ var dom = function(){
 	}
 }();
 
-var display = function(){
+var display = function(blanks,grid){
 	var colSize = ((document.documentElement.clientWidth * 0.3) / 9) - 4;
 	var containerSize = (colSize +2) * 9;
 	var leftPos = (document.documentElement.clientWidth - containerSize) / 2;
@@ -30,83 +30,58 @@ var display = function(){
 
 	for(var i =0; i <81; i++){
 		var col = dom.newEl('div').assignValue('className','col')
-			.assignValue("style","width:"+colSize+"px;height:"+colSize+"px")
-			.assignValue("innerHTML",i);
+			.assignValue("style","width:"+colSize+"px;height:"+colSize+"px;background:"+puzzlePieces.assignBackground(i,blanks)+";")
+			.assignValue("innerHTML",puzzlePieces.assignBlank(i,grid,blanks));
 		dom.append(dom.$("board"),col);
 	}	
 };
 
-var checkPuzzle = function(){
-	var column = function(row,grid,key){
-		return filterMatch(0,key,grid[row]);
+var puzzlePieces = function(){
+	var assignBlank = function(index,grid,blanks){
+		var blank = !blanks[index]? blanks[index] : grid[index];
+		return blank;
+	};
+	var assignBackground = function(index,blanks){
+		var blank = !blanks[index]? "#000" : "#fff";
+		return blank;
 	};
 
-	var row = function(column,grid,key){
-		return filterMatch(0,key,flatten(0,8,grid,column,[]));
-	};
-
-	var grid = function(row,column,grid){
-		var rowStart = row - (row%3);
-		var colStart = col - (col%3);
-
-		var colEnd = colStart + 2;
-		var rowEnd = rowStart + 2;
-	};
-
-	var inRange = function(colStart,colEnd,rowStart,rowEnd,grid){
-		if(rowStart > rowEnd){
-			return -1;
+	var setBlanks = function(blanks){
+		for(var i = 0; i < 8; i++){
+			var index = Math.floor((randomValue(i*8,i/8) + randomValue(i*8,i/8)) / 2);
+			blanks[index] = false;
 		}
+	};
+	var init = function(){
+		var blanks = [];
+		for(var i =0; i < 81; i++){
+			blanks.push(true);
+		}
+		return blanks;
 	};
 
 	return{
-		column:column,
-		row:row,
-		grid:grid
+		init:init,
+		assignBackground:assignBackground,
+		assignBlank:assignBlank,
+		setBlanks:setBlanks
 	};
-
 }();
 
-var filterMatch = function(pos,key,array){
-	if(pos < array.length){
-		if(array[pos]=== key){
-			return key;
-		}
-		pos++;
-		return filterMatch(pos,key,array);
-	}
-	return -1;
-};
-
-var flatten = function(pos,end,array,col,total){
-	if(pos <= end){
-		stackPush(total,array[pos][col]);
-		pos++;
-		flatten(pos,end,array,col,total);
-	}
-	return total;
-};
-
-var accumulator = function(pos,end,indexFn,total,totalFn){
-	if (pos <= end){
-		totalFn(total,indexFn());
-		pos++;
-		accumulator(pos,end,indexFn,total,totalFn);
-	}
-	return total;
-};
-var stackPush = function(a,b){
-	a.push(b);
-	return a;
-};
 var randomValue = function(max,min){
 	return parseInt(Math.floor(Math.random() * max - min) + min);
 };
 
-display();
+var blanks = puzzlePieces.init();
+puzzlePieces.setBlanks(blanks);
+puzzlePieces.setBlanks(blanks);
+puzzlePieces.setBlanks(blanks);
+var grid = [];
+for(var i = 0; i< 81; i++){
+	grid.push(0);
+}
 
-
-
+display(blanks,grid);
 
 /*
 var solvedPuzzle = function(){
@@ -213,93 +188,4 @@ var rotateInput = function(el){
 var checkValue = function(el){
 	var value = parseInt(el.value);
 	solvesPiece(value,el);
-};
-var solvesPiece = function(val,el){
-	var col = Array.from(el.parentElement.children).indexOf(el);
-
-	var row = Array.from(el.parentElement.parentElement.children).indexOf(el.parentElement);
-
-	if(puzzle[row][col]=== val){
-		el.parentElement.children[col + 1].innerHTML = val;
-		el.parentElement.children[col + 1].className = "col";
-		el.parentElement.children[col + 1].removeAttribute("onclick");
-		el.parentElement.children[col + 1].style.background = "#fff";
-		el.parentElement.removeChild(el);
-		return;
-	}
-
-
-	for(var i = 0; i < 9; i++){
-		if(puzzle[row][i]===val){
-			console.log("match row" + i);
-		}
-	}
-	for(var j = 0; j < 9; j++){
-		if(puzzle[j][col]===val){
-			console.log("match column" + j);
-		}
-	}
-
-	var rowStart = row - (row%3);
-	var colStart = col - (col%3);
-
-	var colEnd = colStart + 2;
-	var rowEnd = rowStart + 2;
-
-	for(i=rowStart;i<=rowEnd; i++){
-		for(var k = colStart; k <= colEnd;k++){
-			if(puzzle[i][k]===val){
-				console.log("match grid" + i + " " + k);
-			}
-		}
-	}
-};
-var setPieces = function(seeder,min){
-	var totalPieces = parseInt(Math.floor(Math.random() * seeder - min) + min);
-	return totalPieces;
-};
-var setGame = function(row,col){	
-	if(row > 8 || col > 8){
-		return;
-	}
-	var container = document.getElementById("board");
-	container.children[row].children[col].onclick = function(){ rotateInput(this); };	
-	container.children[row].children[col].innerHTML = "&nbsp";
-	container.children[row].children[col].style.background = "#000";
-};
-var getBlanks = function(grid,min){
-	var arr = [];
-	for(var i = 0; i < 4; i++){
-		arr.push(setPieces(grid,min));
-	}
-
-	var midpt = (arr[0] + arr[1]) / 2;
-	var midpt2 = (arr[2] + arr[3]) / 2;
-	var midpt3 = (arr[0] + arr[1] + arr[2] + arr[3]) / 4;
-	var avg = (midpt3 + midpt2 + midpt) / 3;
-	avg = avg > 2 ? 2 : avg;
-
-	return avg;
-};
-var setBlanks = function(start,end,grid,offsetRow,offsetCol){
-	for(var i = start; i < end; i++){
-		setGame(parseInt(getBlanks(grid,start)) + offsetRow, parseInt(getBlanks(grid,start))+ offsetCol);
-	}
-};
-var difficulty = function(endPt,row,col){
-	if(row > 6){
-		return;
-	}
-	col = col === "" ? 0:col + 3;
-	row = col > 6 ? row + 3:row;
-	col = col > 6 ? 0 : col;
-	setBlanks(1,endPt,4,row,col);
-	difficulty(endPt,row,col);
-};
-var puzzle = fillBoard();
-var easy = 3;
-var medium = 5;
-var hard = 9;
-difficulty(easy,0,"");
-difficulty(medium,0,"");
-difficulty(hard,0,"");*/
+};*/
