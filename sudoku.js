@@ -17,7 +17,7 @@ var dom = function(){
 		$:$,
 		newEl:newEl,
 		append:append
-	}
+	};
 }();
 
 var display = function(blanks,grid){
@@ -31,14 +31,15 @@ var display = function(blanks,grid){
 	for(var i =0; i <81; i++){
 		var col = dom.newEl('div').assignValue('className','col')
 			.assignValue("style","width:"+colSize+"px;height:"+colSize+"px;background:"+puzzlePieces.assignBackground(i,blanks)+";")
-			.assignValue("innerHTML",puzzlePieces.assignBlank(i,grid,blanks));
+			.assignValue("innerHTML",puzzlePieces.assignBlank(i,grid,blanks))
+			.assignValue("onclick",cell);
 		dom.append(dom.$("board"),col);
 	}	
 };
 
 var puzzlePieces = function(){
 	var assignBlank = function(index,grid,blanks){
-		var blank = !blanks[index]? blanks[index] : grid[index];
+		var blank = !blanks[index]? '&nbsp;' : grid[index];
 		return blank;
 	};
 	var assignBackground = function(index,blanks){
@@ -72,16 +73,17 @@ var randomValue = function(max,min){
 	return parseInt(Math.floor(Math.random() * max - min) + min);
 };
 
-var blanks = puzzlePieces.init();
-puzzlePieces.setBlanks(blanks);
-puzzlePieces.setBlanks(blanks);
-puzzlePieces.setBlanks(blanks);
-var grid = [];
-for(var i = 0; i< 81; i++){
-	grid.push(0);
-}
+var cell = function(){
+	!isNaN(this.innerHTML)? true:showInput();
+};
 
-display(blanks,grid);
+var showInput = function(){
+	var input = dom.newEl('input')
+		.assignValue('type','text')
+		.assignValue('className','input');
+	this.event.target.assignValue('innerHTML','');
+	dom.append(this.event.target,input);
+};
 
 /*
 var solvedPuzzle = function(){
@@ -153,39 +155,4 @@ var solvedPuzzle = function(){
 	return{
 		init:init
 	}
-}();
-var fillBoard = function(){
-	var puzzle = solvedPuzzle.init();
-	grid.init();
-	var container = document.getElementById("board");
-	for(var j = 0; j < 9; j++){
-		var cel = parseInt(Math.random() * 8);
-		for(var k = 0; k < 9; k++){
-			container.children[j].children[k].innerHTML = puzzle[j][k];				
-		}
-	}
-
-	return puzzle;
-};
-/*
-var rotateInput = function(el){
-	var pos = Array.from(el.parentElement.children).indexOf(el) + 1;
-	var viewportOffset = el.getBoundingClientRect();
-	var left = viewportOffset.left;
-	var dimension = el.clientWidth;
-	var parent = el.parentElement;
-	var input = grid.puzzlePiece("input","puzzleSquare", dimension, dimension);
-	left = left - lfp;
-	input.setAttribute("type","text");
-	input.style.left = (left+ "px");
-	parent.insertBefore(input,el);
-	el.className += " rotate"; 
-	input.className += " flatten";
-	input.onkeyup = function(){
-		checkValue(this);
-	}
-};
-var checkValue = function(el){
-	var value = parseInt(el.value);
-	solvesPiece(value,el);
-};*/
+}();*/

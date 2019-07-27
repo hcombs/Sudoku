@@ -13,19 +13,24 @@ body{
 	border: 1px solid #cecece;
 	border-radius: 5px;
 	perspective:10000px;
+	font-size: 0px;
 }
 .col{
 	position: relative;
 	display: inline-block;
 	border:1px solid #cecece;
-	backface-visibility: hidden;
-	transform:rotateY(0deg);
-	transition:all linear 0.5s;
 	text-align: center;
+	overflow: hidden;
+	font-size: 20px;
 }
-.guess{
-	background: #bada55;
+.input{
+	width:100%;
+	height:100%;
+	outline: none;
+	border: 0px solid #fff;
+	font-size: 20px;
 }
+
 .puzzleSquare{
     position: absolute;
     transform:rotateY(180deg);
@@ -40,11 +45,7 @@ body{
 	border: 1px solid #5f00ff;
 	/*outline:none;*/
 }
-.rotate{
-	transform:rotateY(180deg);
-	transform-style: preserve-3d;
-	backface-visibility: hidden;
-}
+
 .flatten{
 	transform:rotateY(0deg);
 	transform-style: preserve-3d;
