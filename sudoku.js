@@ -1,5 +1,7 @@
-Element.prototype.assignValue = function(key,value){
-	this[key] = value;
+Element.prototype.assignObjValue = function(obj){
+	for(key in obj){
+		this[key] = obj[key];
+	}
 	return this;
 };
 
@@ -10,31 +12,29 @@ var dom = function(){
 	var newEl = function(type){
 		return document.createElement(type);
 	};
-	var append = function(parent,child){
-		parent.appendChild(child);
-	};
 	return{
 		$:$,
-		newEl:newEl,
-		append:append
+		newEl:newEl
 	};
 }();
 
 var display = function(blanks,grid){
 	var colSize = ((document.documentElement.clientWidth * 0.3) / 9) - 4;
-	var containerSize = (colSize +2) * 9;
+	var containerSize = (colSize + 2) * 9;
 	var leftPos = (document.documentElement.clientWidth - containerSize) / 2;
 
-	dom.$("board").assignValue("innerHTML","")
-		.assignValue("style","width:"+containerSize+"px;height:"+containerSize+"px;left:"+leftPos+"px;");
-
+	dom.$("board").assignObjValue({
+		"style": "width:"+containerSize+"px;height:"+containerSize+"px;left:"+leftPos+"px;"
+	});
+	
 	for(var i =0; i <81; i++){
-		var col = dom.newEl('div').assignValue('className','col')
-			.assignValue("style","width:"+colSize+"px;height:"+colSize+"px;background:"+puzzlePieces.assignBackground(i,blanks)+";")
-			.assignValue("innerHTML",puzzlePieces.assignBlank(i,grid,blanks))
-			.assignValue("onclick",cell);
-		dom.append(dom.$("board"),col);
-	}	
+		dom.$("board").appendChild(dom.newEl('div').assignObjValue({
+			"style":"width:"+colSize+"px;height:"+colSize+"px;background:"+puzzlePieces.assignBackground(i,blanks)+";",
+			"innerHTML":puzzlePieces.assignBlank(i,grid,blanks),
+			"onclick":cell,
+			"className":"col"
+		}));
+	}
 };
 
 var puzzlePieces = function(){
@@ -79,10 +79,14 @@ var cell = function(){
 
 var showInput = function(){
 	var input = dom.newEl('input')
-		.assignValue('type','text')
-		.assignValue('className','input');
-	this.event.target.assignValue('innerHTML','');
-	dom.append(this.event.target,input);
+		.assignObjValue({
+			'type':'text',
+		    'className':'input'
+		});
+	this.event.target.assignObjValue({
+		'innerHTML':''		
+	});
+	this.event.target.appendChild(input);
 };
 
 /*
