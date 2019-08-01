@@ -60,8 +60,54 @@ var board = function(){
     	return { x: x, y: y, value: 0, isBlank:false};
 	});
 
+	var findMatch = function(puzzleBoard, key,val){
+		return puzzleBoard.filter(function(x){ 
+			return x[key] === val;
+		});
+	};
+
+	var inSet = function(x,y,value){
+		findMatch(
+			board.findMatch(grid,"x",x).
+			concat(board.findMatch(grid,"y",y)),
+			"value",
+			value);
+	}
+
+
+	var fillValues = function (grid,i){
+
+		var z = findMatch(grid,"value",0);
+
+		if(z.length === 0){
+			return true;
+		}
+
+		z = 0;
+
+		for(var i = 1; i < 10; i++){
+			if (inSet(grid[z].x, grid[z].y, value)){
+				grid[z].value = value;
+				if (fillValues(grid,i)){
+					return true;
+				}
+				grid[z].value = 0;
+			}
+		}
+
+		return false;
+	};
+
+	var init = function(){
+		grid[randomValue(81,0)].value = randomValue(9,1);
+		fillValues();
+		return grid;
+	}
+
 	return {
-		grid:grid
+		grid:grid,
+		findMatch:findMatch, 
+		init:init
 	};
 }();
 
@@ -83,7 +129,6 @@ var puzzlePieces = function(){
 	};
 
 	return{
-		init:init,
 		assignBackground:assignBackground,
 		assignBlank:assignBlank,
 		setBlanks:setBlanks
@@ -99,60 +144,17 @@ var cell = function(){
 };
 
 var showInput = function(){
-	var input = dom.newEl('input')
-		.assignObjValue({
-			'type':'text',
-		    'className':'input'
-		});
 	this.event.target.assignObjValue({
 		'innerHTML':''		
-	});
-	this.event.target.appendChild(input);
+		}).appendChild(dom.newEl('input')
+			.assignObjValue({
+				'type':'text',
+		    	'className':'input'
+		}));
 };
 
 /*
 var solvedPuzzle = function(){
-	var makeGrid = function(grid,row,col){
-		var point = unassignedSection(grid);
-		var row = point[0];
-		var col = point[1];
-			
-		if(row === -1){
-			return true;
-		}
-
-		for(var ref = 1; ref <= 9; ref++){
-			if(usable(ref,col,row,grid)){
-				grid[row][col] = ref;
-					
-				if(makeGrid(grid,row,col)){
-					return true;
-				}
-				grid[row][col] = 0;
-			}
-		}
-		return false;
-	};
-	
-	var unassignedSection = function(grid){
-		var section = [];
-		section[0] = -1;
-		section[1] = -1;
-
-		for(var i = 0; i<9;i++){
-			for(var j = 0; j<9;j++){
-				if(grid[i][j]===0){
-					section[0] = i;
-					section[1] = j;
-				}
-			}
-		}
-			return section;
-	};
-
-	var usable = function(ref,col,row,grid){
-		return !inGrid(ref,grid,col,row) * !inRow(ref,grid,row) * !inCol(ref,grid,col);
-	};
 
 	var inGrid = function(ref,grid,col,row){
 		var rowStart = row - (row%3);
@@ -160,24 +162,7 @@ var solvedPuzzle = function(){
 
 		var colEnd = colStart + 2;
 		var rowEnd = rowStart + 2;
-
-		for(i=rowStart;i<=rowEnd; i++){
-			for(var k = colStart; k <= colEnd;k++){
-				if(grid[i][k]===ref){
-					return true;
-				}
-			}
-		}
 			
 		return false;
 	};
-
-	var init = function(){	
-		grid[randSudokuVal()][randSudokuVal()] = randSudokuVal();
-		makeGrid(grid,0,0);
-		return grid;
-	}
-	return{
-		init:init
-	}
 }();*/

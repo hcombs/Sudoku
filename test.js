@@ -1,30 +1,5 @@
-var blanks = puzzlePieces.init();
-puzzlePieces.setBlanks(blanks);
-puzzlePieces.setBlanks(blanks);
-puzzlePieces.setBlanks(blanks);
+var grid = board.grid;
 
-//display(blanks,grid);
+grid[randomValue(81,0)].value = randomValue(9,1);
 
-var range = function(n) {
-    var result = [];
-    for(var i = 1; i < n; i++){
-        result.push(i);
-	}
-    return result;
-};
-
-var cross = function(as, bs, f) {
-    var result = [];
-    for(var i = 0; i < as.length; i++) {
-        for(var j = 0; j < bs.length; j++) {
-            result.push(f(as[i], bs[j]));
-	     }
-   }
-   return result;
-};
-
-var grid = cross(range(10),range(10), function(x,y) {
-    return { x: x, y: y, value: 0, isBlank:false};
-});
-
-console.log(grid);
+var x = board.findMatch(board.findMatch(grid,"x",1).concat(board.findMatch(grid,"y",4)),"value",2);
