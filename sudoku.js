@@ -27,15 +27,43 @@ var display = function(blanks,grid){
 		"style": "width:"+containerSize+"px;height:"+containerSize+"px;left:"+leftPos+"px;"
 	});
 	
-	for(var i =0; i <81; i++){
-		dom.$("board").appendChild(dom.newEl('div').assignObjValue({
-			"style":"width:"+colSize+"px;height:"+colSize+"px;background:"+puzzlePieces.assignBackground(i,blanks)+";",
-			"innerHTML":puzzlePieces.assignBlank(i,grid,blanks),
-			"onclick":cell,
-			"className":"col"
-		}));
-	}
+	blanks.map(function(x,i){
+		return dom.$("board").appendChild(dom.newEl('div').assignObjValue({
+					"style":"width:"+colSize+"px;height:"+colSize+"px;background:"+puzzlePieces.assignBackground(i,blanks)+";",
+					"innerHTML":puzzlePieces.assignBlank(i,grid,blanks),
+					"onclick":cell,
+					"className":"col"
+				}));
+	});
 };
+
+var board = function(){
+	var range = function(n) {
+    	var result = [];
+    	for(var i = 1; i < n; i++){
+        	result.push(i);
+		}
+    	return result;
+	};
+
+	var cross = function(as, bs, f) {
+    	var result = [];
+    	for(var i = 0; i < as.length; i++) {
+        	for(var j = 0; j < bs.length; j++) {
+            	result.push(f(as[i], bs[j]));
+	     	}
+   		}
+   		return result;
+	};
+
+	var grid = cross(range(10),range(10), function(x,y) {
+    	return { x: x, y: y, value: 0, isBlank:false};
+	});
+
+	return {
+		grid:grid
+	};
+}();
 
 var puzzlePieces = function(){
 	var assignBlank = function(index,grid,blanks){
@@ -52,13 +80,6 @@ var puzzlePieces = function(){
 			var index = Math.floor((randomValue(i*8,i/8) + randomValue(i*8,i/8)) / 2);
 			blanks[index] = false;
 		}
-	};
-	var init = function(){
-		var blanks = [];
-		for(var i =0; i < 81; i++){
-			blanks.push(true);
-		}
-		return blanks;
 	};
 
 	return{
