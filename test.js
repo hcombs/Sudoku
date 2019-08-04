@@ -1,5 +1,7 @@
-var grid = board.grid;
+var x = board.init();
+var blanks = [];
+for(var i = 0; i < 81; i++){
+	blanks.push(true);
+}
 
-grid[randomValue(81,0)].value = randomValue(9,1);
-
-var x = board.findMatch(board.findMatch(grid,"x",1).concat(board.findMatch(grid,"y",4)),"value",2);
+display(x);
