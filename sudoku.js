@@ -27,7 +27,7 @@ var display = function(grid){
 		"style": "width:"+containerSize+"px;height:"+containerSize+"px;left:"+leftPos+"px;"
 	});
 	
-	blanks.map(function(x,i){
+	grid.map(function(x,i){
 		return dom.$("board").appendChild(dom.newEl('div').assignObjValue({
 					"style":"width:"+colSize+
 					"px;height:"+colSize+
@@ -64,58 +64,52 @@ var board = function(){
     	return { x: x, y: y, index:i, value: 0, isBlank:false};
 	});
 
-	var findMatch = function(array, key,val){
-		return array.filter(function(x){ return x[key] === val;});
-	};
+	var notInSet = function(x,y,value){
+		var startX = x - (x % 3) + 1 <= x? x - (x % 3) + 1: x - 2;
+		var startY = y - (y % 3) + 1 <= y? y - (y % 3) + 1: y - 2;
 
-	var notInSet = function(x,y,value,grid){
-		var fullSet = grid.filter(function(w){
-						return w.x === x && w.value === value;
-				   })
-					.concat(grid.filter(function(v){
-						return v.y === y && v.value === value;
-				   })
-		);
-
-		var startX = x - (x % 3) + 1;
-		var startY = y - (y % 3) + 1;
-		
 		var endX = startX + 2;
 		var endY = startY + 2;
 
-		grid.forEach(function(v,i){
-			if(v.x >= startX && v.x <= endX && v.y >= startY && v.y <= endY && v.value === value){
-				fullSet.push(v);
-			}
-		});			
 
-		if (x===1 && y > 3){
-			console.log(fullSet+ " " + value);
+
+		if(x<4 && y <4){
+			console.log ("x: "+x+" y:"+y+"  "+startX+" "+startY);
 		}
+		var fullSet = grid.filter(function(w){
+						var row = w.x === x && w.value === value;
+						var col = w.y === y && w.value === value;
+						var section = (w.x >= startX && w.x <= endX) && (w.y >= startY && w.y <= endY) && w.value === value;
+						if(row || col || section){
+							return w;
+						}
+		});
 
 		return fullSet.length === 0;
 	};
 
 	var fillValues = function (grid){
 
-		var z = findMatch(grid,"value",0);
+		var c = grid.filter(function(w){ return w.value === 0;});
 
-		if(z.length === 0){
+		if(c.length === 0){
 			return true;
 		}
 
-		var x = z[0].x;
-		var y = z[0].y;
+		var x = c[0].x;
+		var y = c[0].y;
+		var pos = c[0].index;
 
 		for(var i = 1; i < 10; i++){
-			if (notInSet(x, y, i, grid)){
-				grid[z[0].index].value = i;
+
+			if (notInSet(x, y, i)){
+				grid[pos].value = i;
 		
 				if (fillValues(grid)){
 					return true;
 				}
 		
-				grid[z[0].index].value = 0;
+				grid[pos].value = 0;
 			}
 		}
 
@@ -123,29 +117,15 @@ var board = function(){
 	};
 
 	var init = function(){
-		grid[0].value = randomValue(9,1);
-		fillValues(grid);
+		grid[randomValue(81,1)].value = randomValue(9,1);
+		fillValues(grid,0);
 		return grid;
 	}
 
 	return {
 		grid:grid,
-		findMatch:findMatch, 
 		notInSet:notInSet,
 		init:init
-	};
-}();
-
-var puzzlePieces = function(){
-	var setBlanks = function(blanks){
-		for(var i = 0; i < 8; i++){
-			var index = Math.floor((randomValue(i*8,i/8) + randomValue(i*8,i/8)) / 2);
-			blanks[index] = false;
-		}
-	};
-
-	return{
-		setBlanks:setBlanks
 	};
 }();
 
