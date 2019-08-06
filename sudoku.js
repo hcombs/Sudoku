@@ -12,6 +12,7 @@ var dom = function(){
 	var newEl = function(type){
 		return document.createElement(type);
 	};
+
 	return{
 		$:$,
 		newEl:newEl
@@ -35,7 +36,8 @@ var display = function(grid){
 					"innerHTML":grid[i].isBlank ? "&nbsp;":grid[i].value,
 					"onclick":cell,
 					"className":"col"
-				}));
+				})
+		);
 	});
 };
 
@@ -64,6 +66,10 @@ var board = function(){
     	return { x: x, y: y, index:i, value: 0, isBlank:false};
 	});
 
+	var randomValue = function(max,min){
+		return parseInt(Math.floor(Math.random() * max - min) + min);
+	};
+
 	var notInSet = function(x,y,value){
 		var startX = x - (x % 3) + 1 <= x? x - (x % 3) + 1: x - 2;
 		var startY = y - (y % 3) + 1 <= y? y - (y % 3) + 1: y - 2;
@@ -71,25 +77,17 @@ var board = function(){
 		var endX = startX + 2;
 		var endY = startY + 2;
 
-
-
-		if(x<4 && y <4){
-			console.log ("x: "+x+" y:"+y+"  "+startX+" "+startY);
-		}
-		var fullSet = grid.filter(function(w){
-						var row = w.x === x && w.value === value;
-						var col = w.y === y && w.value === value;
-						var section = (w.x >= startX && w.x <= endX) && (w.y >= startY && w.y <= endY) && w.value === value;
-						if(row || col || section){
-							return w;
-						}
+		return grid.filter(function(w){
+				var row = w.x === x && w.value === value;
+				var col = w.y === y && w.value === value;
+				var section = (w.x >= startX && w.x <= endX) && (w.y >= startY && w.y <= endY) && w.value === value;
+				if(row || col || section){
+					return w;
+				}
 		});
-
-		return fullSet.length === 0;
 	};
 
 	var fillValues = function (grid){
-
 		var c = grid.filter(function(w){ return w.value === 0;});
 
 		if(c.length === 0){
@@ -102,23 +100,31 @@ var board = function(){
 
 		for(var i = 1; i < 10; i++){
 
-			if (notInSet(x, y, i)){
+			if (notInSet(x, y, i).length === 0){
 				grid[pos].value = i;
 		
 				if (fillValues(grid)){
 					return true;
 				}
-		
 				grid[pos].value = 0;
 			}
 		}
-
 		return false;
 	};
 
-	var init = function(){
+	var assignBlanks = function(difficulty){
+		var index = grid.filter(function(key){
+			if (key.x === x && key.y === y){
+				return key.index;
+			}
+		});
+		grid[index].isBlank = true;
+	}
+
+	var init = function(difficulty){
 		grid[randomValue(81,1)].value = randomValue(9,1);
-		fillValues(grid,0);
+		fillValues(grid);
+		assignBlanks(difficulty);
 		return grid;
 	}
 
@@ -128,10 +134,6 @@ var board = function(){
 		init:init
 	};
 }();
-
-var randomValue = function(max,min){
-	return parseInt(Math.floor(Math.random() * max - min) + min);
-};
 
 var cell = function(){
 	!isNaN(this.innerHTML)? true:showInput();
@@ -144,5 +146,6 @@ var showInput = function(){
 			.assignObjValue({
 				'type':'text',
 		    	'className':'input'
-		}));
+			})
+		);
 };
