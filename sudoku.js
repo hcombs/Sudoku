@@ -1,5 +1,5 @@
 Element.prototype.assignObjValue = function(obj){
-	for(key in obj){
+	for(var key in obj){
 		this[key] = obj[key];
 	}
 	return this;
@@ -113,20 +113,29 @@ var board = function(){
 	};
 
 	var assignBlanks = function(difficulty){
-		var index = grid.filter(function(key){
+		var x = parseInt(Math.ceil(randomValue(9,1) + randomValue(9,1)  / 4));
+		var y = parseInt(Math.ceil(randomValue(9,1) + randomValue(9,1)  / 4));
+
+		var pos = grid.filter(function(key){
 			if (key.x === x && key.y === y){
-				return key.index;
+				return key;
 			}
 		});
-		grid[index].isBlank = true;
-	}
+
+		pos = pos.length > 0 ? pos[0].index : 0;
+
+		grid[pos].isBlank = true;
+
+		difficulty--;
+		difficulty > 0 ? assignBlanks(difficulty):true;
+	};
 
 	var init = function(difficulty){
 		grid[randomValue(81,1)].value = randomValue(9,1);
 		fillValues(grid);
 		assignBlanks(difficulty);
 		return grid;
-	}
+	};
 
 	return {
 		grid:grid,
@@ -149,3 +158,6 @@ var showInput = function(){
 			})
 		);
 };
+
+var solution = board.init(70);
+display(solution);
