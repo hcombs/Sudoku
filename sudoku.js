@@ -5,6 +5,29 @@ Element.prototype.assignObjValue = function(obj){
 	return this;
 };
 
+var difficulty ={
+	"Easy":10,
+	"Medium":40,
+	"Hard":70
+};
+
+var square = function (piece){ 
+	var number = piece.isBlank ? "&nbsp;" : piece.value;
+	return component({
+		type:piece.type,
+		elementProperties:{
+			className:piece.class,
+			onclick:showInput,
+			innerHTML:number,
+			style:piece.styleVals
+		}
+	});
+};
+
+var component = function(elObj){
+	return dom.newEl(elObj.type).assignObjValue(elObj.elementProperties);
+};
+
 var dom = function(){
 	var $ = function(id){
 		return document.getElementById(id);
@@ -24,21 +47,20 @@ var display = function(grid){
 	var containerSize = (colSize + 2) * 9;
 	var leftPos = (document.documentElement.clientWidth - containerSize) / 2;
 
+	dom.$("difficulty").assignObjValue({
+		"style":"width:" + containerSize + "px;" + "left:" + leftPos + "px;"
+	});
+
+	var diffLevels = dom.$("difficulty").children;
+	[].forEach.call(diffLevels ,function(x){
+		x.onclick = log;
+	});
+
 	dom.$("board").assignObjValue({
 		"style": "width:"+containerSize+"px;height:"+containerSize+"px;left:"+leftPos+"px;"
 	});
 	
-	grid.map(function(x,i){
-		return dom.$("board").appendChild(dom.newEl('div').assignObjValue({
-					"style":"width:"+colSize+
-					"px;height:"+colSize+
-					"px;background:"+(grid[i].isBlank ? "#000": "#fff") +";",
-					"innerHTML":grid[i].isBlank ? "&nbsp;":grid[i].value,
-					"onclick":cell,
-					"className":"col"
-				})
-		);
-	});
+	grid.map(function(x,i){	return dom.$("board").appendChild(square(grid[i]));	});
 };
 
 var board = function(){
@@ -63,7 +85,18 @@ var board = function(){
 	};
 
 	var grid = cross(range(10),range(10), function(x,y,i) {
-    	return { x: x, y: y, index:i, value: 0, isBlank:false};
+		var colSize = ((document.documentElement.clientWidth * 0.3) / 9) - 4;
+		var style = "width:"+colSize+"px;height:"+colSize+"px;"
+    	return { 
+    				x: x, 
+    			 	y: y, 
+    			 	index:i, 
+    			 	value: 0, 
+    			 	isBlank:false, 
+    			 	styleVals:style,
+    			 	type:"div",
+    			 	class:"col"
+    			};
 	});
 
 	var randomValue = function(max,min){
@@ -94,19 +127,18 @@ var board = function(){
 			return true;
 		}
 
-		var x = c[0].x;
-		var y = c[0].y;
-		var pos = c[0].index;
+		var currentPiece = c[0];
 
 		for(var i = 1; i < 10; i++){
 
-			if (notInSet(x, y, i).length === 0){
-				grid[pos].value = i;
+			if (notInSet(currentPiece.x, currentPiece.y, i).length === 0){
+				grid[currentPiece.index].value = i;
 		
 				if (fillValues(grid)){
 					return true;
 				}
-				grid[pos].value = 0;
+
+				grid[currentPiece.index].value = 0;
 			}
 		}
 		return false;
@@ -144,10 +176,6 @@ var board = function(){
 	};
 }();
 
-var cell = function(){
-	!isNaN(this.innerHTML)? true:showInput();
-};
-
 var showInput = function(){
 	this.event.target.assignObjValue({
 		'innerHTML':''		
@@ -159,5 +187,13 @@ var showInput = function(){
 		);
 };
 
+var log = function(){
+	dom.$("board").innerHTML = "";
+	var key = this.innerHTML.trim();
+	solution = board.init(difficulty[key]);
+	display(solution);
+};
+
 var solution = board.init(70);
 display(solution);
+

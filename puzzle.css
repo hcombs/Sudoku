@@ -7,6 +7,17 @@ body{
 	font-size:20px;
 	font-family: arial, sans-serif;
 }
+.difficultyContainer{
+	position: absolute;
+	top: 5%;
+	height:10%;
+}
+.difficultyLevel{
+	display: inline-block;
+	height: 100%;
+	width: 33.33%;
+	text-align:center;
+}
 .boardContainer{
 	position: absolute;
 	top:20%;
