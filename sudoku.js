@@ -6,20 +6,26 @@ Element.prototype.assignObjValue = function(obj){
 };
 
 var difficulty ={
-	"Easy":10,
-	"Medium":40,
-	"Hard":70
+	"Easy":40,
+	"Medium":60,
+	"Hard":80
+};
+
+var selectedPos = {
+	"Easy":"0",
+	"Medium":"33.33%",
+	"Hard":"66.66%"
 };
 
 var square = function (piece){ 
 	var number = piece.isBlank ? "&nbsp;" : piece.value;
 	return component({
-		type:piece.type,
-		elementProperties:{
-			className:piece.class,
-			onclick:showInput,
-			innerHTML:number,
-			style:piece.styleVals
+			type:piece.type,
+			elementProperties:{
+				className:piece.class,
+				onclick:showInput,
+				innerHTML:number,
+				style:piece.styleVals
 		}
 	});
 };
@@ -53,7 +59,7 @@ var display = function(grid){
 
 	var diffLevels = dom.$("difficulty").children;
 	[].forEach.call(diffLevels ,function(x){
-		x.onclick = log;
+		x.onclick = setDifficulty;
 	});
 
 	dom.$("board").assignObjValue({
@@ -162,7 +168,16 @@ var board = function(){
 		difficulty > 0 ? assignBlanks(difficulty):true;
 	};
 
+	var clearGrid = function(){
+		grid = grid.map(function(z){
+			z.isBlank = false;
+			z.value = 0;
+			return z;
+		});
+	}
+
 	var init = function(difficulty){
+		clearGrid();
 		grid[randomValue(81,1)].value = randomValue(9,1);
 		fillValues(grid);
 		assignBlanks(difficulty);
@@ -176,8 +191,8 @@ var board = function(){
 	};
 }();
 
-var showInput = function(){
-	this.event.target.assignObjValue({
+var showInput = function(e){
+	e.target.assignObjValue({
 		'innerHTML':''		
 		}).appendChild(dom.newEl('input')
 			.assignObjValue({
@@ -187,13 +202,14 @@ var showInput = function(){
 		);
 };
 
-var log = function(){
+var setDifficulty = function(){
 	dom.$("board").innerHTML = "";
 	var key = this.innerHTML.trim();
+	dom.$("selected").style.left = selectedPos[key];
+	dom.$("selected").innerHTML = key;
 	solution = board.init(difficulty[key]);
 	display(solution);
 };
 
 var solution = board.init(70);
 display(solution);
-

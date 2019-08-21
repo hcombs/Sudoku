@@ -9,14 +9,28 @@ body{
 }
 .difficultyContainer{
 	position: absolute;
-	top: 5%;
-	height:10%;
+    top: 5%;
+    height: 10%;
+    cursor: pointer;
+    line-height: 85px;
+    text-align: center;
 }
 .difficultyLevel{
 	display: inline-block;
 	height: 100%;
 	width: 33.33%;
-	text-align:center;
+}
+.selected{
+    position: absolute;
+    border-radius: 50px;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 33.33%;
+    z-index: 3;
+    background: #433;
+    transition: left 0.3s linear;
+    color:#fff;
 }
 .boardContainer{
 	position: absolute;
@@ -33,6 +47,12 @@ body{
 	text-align: center;
 	overflow: hidden;
 	font-size: 20px;
+}
+.col:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
 }
 .input{
 	width:100%;
