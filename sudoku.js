@@ -208,8 +208,11 @@ var setDifficulty = function(){
 	dom.$("selected").style.left = selectedPos[key];
 	dom.$("selected").innerHTML = key;
 	solution = board.init(difficulty[key]);
+	console.log(`Blank count ${solution.filter(e=>e.isBlank == true).length - 1}`); 
 	display(solution);
 };
 
 var solution = board.init(70);
 display(solution);
+
+console.log(`Blank count ${solution.filter(e=>e.isBlank == true).length - 1}`); 
