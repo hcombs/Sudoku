@@ -19,7 +19,8 @@ var selectedPos = {
 
 var square = function (piece){ 
 	var number = piece.isBlank ? "&nbsp;" : piece.value;
-	return component({
+
+	var col = component({
 			type:piece.type,
 			elementProperties:{
 				className:piece.class,
@@ -28,6 +29,8 @@ var square = function (piece){
 				style:piece.styleVals
 		}
 	});
+	col.setAttribute("guess", piece.isBlank);
+	return col;
 };
 
 var component = function(elObj){
@@ -192,14 +195,10 @@ var board = function(){
 }();
 
 var showInput = function(e){
-	e.target.assignObjValue({
-		'innerHTML':''		
-		}).appendChild(dom.newEl('input')
-			.assignObjValue({
-				'type':'text',
-		    	'className':'input'
-			})
-		);
+	if (e.target.getAttribute("guess") == "true"){
+		e.target.setAttribute("contentEditable",true);
+		e.target.focus();
+	}
 };
 
 var setDifficulty = function(){
@@ -208,11 +207,9 @@ var setDifficulty = function(){
 	dom.$("selected").style.left = selectedPos[key];
 	dom.$("selected").innerHTML = key;
 	solution = board.init(difficulty[key]);
-	console.log(`Blank count ${solution.filter(e=>e.isBlank == true).length - 1}`); 
 	display(solution);
 };
 
 var solution = board.init(70);
 display(solution);
 
-console.log(`Blank count ${solution.filter(e=>e.isBlank == true).length - 1}`); 
