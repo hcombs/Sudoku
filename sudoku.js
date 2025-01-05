@@ -30,6 +30,7 @@ var square = function (piece){
 		}
 	});
 	col.setAttribute("guess", piece.isBlank);
+	col.setAttribute("value",piece.value);
 	return col;
 };
 
@@ -198,6 +199,13 @@ var showInput = function(e){
 	if (e.target.getAttribute("guess") == "true"){
 		e.target.setAttribute("contentEditable",true);
 		e.target.focus();
+		e.target.oninput = (e)=>{
+			if(parseInt(e.target.innerHTML) === parseInt(e.target.getAttribute("value"))){
+				e.target.setAttribute("contentEditable",false);
+				return;
+			}
+			e.target.innerHTML = "";
+		}
 	}
 };
 
