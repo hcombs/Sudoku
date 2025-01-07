@@ -202,6 +202,7 @@ var showInput = function(e){
 		e.target.oninput = (e)=>{
 			if(parseInt(e.target.innerHTML) === parseInt(e.target.getAttribute("value"))){
 				e.target.setAttribute("contentEditable",false);
+				e.target.style.background = "green";
 				return;
 			}
 			e.target.innerHTML = "";
