@@ -218,7 +218,25 @@ var setDifficulty = function(){
 	solution = board.init(difficulty[key]);
 	display(solution);
 };
+const setTime = (timeObj) => {
+	let incrementer = timeObj.seconds == 59 ? 1 : 0;
+	timeObj.minutes = formatMinutes(timeObj.minutes,incrementer);
+	timeObj.seconds = timeObj.seconds == 59 ? 0 : timeObj.seconds + 1;
+	updateTimer(`${timeObj.minutes}:${timeObj.seconds}`);
+}
+
+const formatMinutes = (minutes,incrementer) => minutes + incrementer;
+const formatSeconds = (seconds) => seconds < 10 ? "0" + seconds: seconds;
+const updateTimer = (elapsedTime) => document.querySelector('#timer').innerHTML = elapsedTime;
 
 var solution = board.init(70);
 display(solution);
 
+let timeObj = {
+	seconds:0,
+	minutes:0
+};
+
+const startTimer = () => {
+	setInterval(()=>setTime(timeObj),1000);
+};
