@@ -234,9 +234,15 @@ display(solution);
 
 let timeObj = {
 	seconds:0,
-	minutes:0
+	minutes:0,
+	id:''
 };
 
 const startTimer = () => {
-	setInterval(()=>setTime(timeObj),1000);
+	timeObj.id = setInterval(()=>setTime(timeObj),1000);
+};
+
+const stopTimer = ()=>{
+	clearInterval(timeObj.id)
+	document.querySelector('#timer').innerHTML = '';
 };
