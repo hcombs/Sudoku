@@ -197,11 +197,11 @@ var board = function(){
 
 var showInput = function(e){
 	if (e.target.getAttribute("guess") == "true"){
-		e.target.setAttribute("contentEditable",true);
+		e.target.setAttribute("contenteditable",true);
 		e.target.focus();
 		e.target.oninput = (e)=>{
 			if(parseInt(e.target.innerHTML) === parseInt(e.target.getAttribute("value"))){
-				e.target.setAttribute("contentEditable",false);
+				e.target.setAttribute("contenteditable",false);
 				e.target.style.background = "green";
 				return;
 			}
@@ -222,7 +222,7 @@ const setTime = (timeObj) => {
 	let incrementer = timeObj.seconds == 59 ? 1 : 0;
 	timeObj.minutes = formatMinutes(timeObj.minutes,incrementer);
 	timeObj.seconds = timeObj.seconds == 59 ? 0 : timeObj.seconds + 1;
-	updateTimer(`${timeObj.minutes}:${timeObj.seconds}`);
+	updateTimer(`${timeObj.minutes}:${formatSeconds(timeObj.seconds)}`);
 }
 
 const formatMinutes = (minutes,incrementer) => minutes + incrementer;
