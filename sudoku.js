@@ -222,7 +222,9 @@ const setTime = (timeObj) => {
 	let incrementer = timeObj.seconds == 59 ? 1 : 0;
 	timeObj.minutes = formatMinutes(timeObj.minutes,incrementer);
 	timeObj.seconds = timeObj.seconds == 59 ? 0 : timeObj.seconds + 1;
-	updateTimer(`${timeObj.minutes}:${formatSeconds(timeObj.seconds)}`);
+	timeObj.tens = timeObj.seconds / 10 >= 1 ? parseInt(timeObj.seconds / 10) : 0;
+	timeObj.ones = timeObj.tens > 0 ? timeObj.seconds - (timeObj.tens * 10) : timeObj.seconds;
+	updateTimer(`${timeObj.minutes}:${timeObj.tens}${timeObj.ones}`);
 }
 
 const formatMinutes = (minutes,incrementer) => minutes + incrementer;
@@ -235,6 +237,8 @@ display(solution);
 let timeObj = {
 	seconds:0,
 	minutes:0,
+	tens:0,
+	ones:0,
 	id:''
 };
 
