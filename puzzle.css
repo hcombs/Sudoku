@@ -1,3 +1,7 @@
+:root{
+	--font-size:25vw;
+}
+
 body{
 	width:100%;
 	height:100%;
@@ -6,6 +10,10 @@ body{
 	margin:0;
 	font-size:20px;
 	font-family: arial, sans-serif;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
 }
 .difficultyContainer{
 	position: absolute;
@@ -132,4 +140,79 @@ body{
 		transform:rotateX(0deg);
 		background:#cecece;
 	}
+}
+
+.a-half {
+	font-size:var(--font-size);
+	line-height:var(--font-size);
+	height:calc(var(--font-size) / 2);
+	width:calc(var(--font-sze) / 2);
+	overflow:hidden;
+	margin: 0 0.5vw;
+}
+
+.rotation-basis{
+	margin-top:calc(var(--font-size) / 2 * -1);
+	height:calc(var(--font-size)/2);
+	display:flex;
+	transform:perspective(500px);
+	transform-style:preserve-3d;
+}
+.rotating-half-front-side{
+	transform-origin:bottom center;
+	backface-visibility:hidden;
+	animation:rotating-half-front-side-rotation 700ms linear;
+	animation-fill-mode:forwards;
+}
+
+.rotating-half-back-side{
+	transform-origin: top center;
+	margin-top:calc(var(--font-size) / 2);
+	backface-visibility:hidden;
+	animation:rotating-half-back-side-rotation 700ms linear;
+	animation-fill-mode:forwards;
+}
+
+.number-upper-half{
+	border-top-right-radius: 2vw;
+	border-top-left-radius: 2vw;
+	background-color: grey;
+}
+
+.number-lower-half{
+	border-bottom-right-radius: 2vw;
+	border-bottom-left-radius: 2vw;
+	background-color:grey;
+	margin-top:calc(var(--font-size) / 2 * -1); 
+}
+
+.rotating-half-front-side .number-upper-half{
+	animation:rotating-half-front-side-shade 700ms linear;
+	animation-fill-mode:forwards;
+}
+
+.rotating-half-back-side .number-lower-half {
+	animation:rotating-half-back-side-shade 700ms linear;
+	animation-fill-mode:forwards;
+}
+
+@keyframes rotating-half-front-side-rotation {
+	0%{ transform: rotateX(0deg); }
+	100%{ transform:rotateX(-180deg);}
+}
+
+@keyframes rotating-half-back-side-rotation {
+	0%{ transform:rotateX(180deg);}
+	100%{transform:rotateX(0deg);}
+}
+
+@keyframes rotating-half-front-side-shade{
+	0%{background-color grey; }
+	100% { background-color:black}
+}
+
+
+@keyframes rotating-half-back-side-shade{
+	0%{background-color white; }
+	100% { background-color:grey;}
 }
